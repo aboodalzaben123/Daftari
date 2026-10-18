@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f3f6fb">
-<meta name="app-version" content="5">
+<meta name="app-version" content="10">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="دفتري">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>دفتري</title>
-<style>
+<style id="appcss">
 :root{--bg:#f3f6fb;--card:#ffffff;--elev:#eaf0f8;--ink:#1c2433;--mute:#66738a;--line:#d9e1ee;--accent:#3b82f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#f3f6fb;--card:#ffffff;--elev:#eaf0f8;--ink:#1c2433;--mute:#66738a;--line:#d9e1ee;--accent:#3b82f6}}
 :root[data-theme="dark"]{--bg:#f3f6fb;--card:#ffffff;--elev:#eaf0f8;--ink:#1c2433;--mute:#66738a;--line:#d9e1ee;--accent:#3b82f6}
@@ -106,16 +106,13 @@ textarea,.cin{width:100%;font-family:ui-monospace,Menlo,monospace;direction:ltr;
 #pages{padding-top:16px;padding-bottom:20px}
 #calc{transform-origin:top left}#calc.mini{width:auto;padding:0;border-radius:999px;overflow:visible;max-height:none}#calc.mini>.row,#calc.mini #cc,#calc.mini #gg{display:none!important}#kchip{position:fixed;z-index:70;pointer-events:none;transform:translate(-50%,-130%);background:var(--accent);color:#fff;font:700 20px ui-monospace,Menlo,monospace;direction:ltr;padding:6px 14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35)}.page.kdp{outline:3px dashed var(--accent);outline-offset:-3px}#kbub{display:none;align-items:center;gap:6px;min-width:52px;height:52px;padding:0 16px;font-size:22px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}#calc.mini #kbub{display:flex}#kbv{font:700 13px ui-monospace,Menlo,monospace;direction:ltr;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}#krs{position:sticky;display:flex;align-items:center;justify-content:center;width:34px;height:34px;margin:4px -6px -6px auto;float:right;touch-action:none;cursor:nwse-resize;color:var(--mute);font-size:20px;line-height:1;user-select:none;-webkit-user-select:none;border-radius:50%;background:color-mix(in srgb,var(--card) 80%,transparent)}#calc.mini #krs{display:none}#calc .row button.sm{min-width:34px;padding:6px 8px}
 #pages.two{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:12px;width:100%}#pages.two .page{margin:0 0 14px}
-@media (orientation:landscape) and (min-width:99999px){#ed:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr)}#bar{grid-column:1/-1}#view{grid-column:1;grid-row:2;min-width:0}#dock{grid-column:2;grid-row:2;width:80px;overflow-y:auto;overflow-x:hidden;border-top:0;border-right:1px solid var(--line);box-shadow:none;padding:6px 4px;align-items:center}#tools,#styl{flex-direction:column;overflow:visible}#tools button{width:100%}#tools i{width:24px;height:1px;margin:3px 0}#sw{flex-wrap:wrap!important;justify-content:center}#styl{gap:8px}#pi{left:calc(var(--dkw,80px) + 10px)}#lsm,#erbar,#lzbar,#stp,#pnm{bottom:12px!important;top:auto!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important;max-height:calc(100% - 90px)}#lsbar{bottom:auto!important;top:calc(var(--bh,56px) + 10px)!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important}#pnm::after{display:none}}
 
 :root{--grad:linear-gradient(135deg,#6c5ce7,#5b8cff)}#lib{max-width:1200px}.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}.rc{flex:0 0 170px}.bk{border-top:1px solid var(--line);border-radius:16px;padding:12px;background:color-mix(in srgb,var(--bc,var(--accent)) 12%,var(--card));border-color:color-mix(in srgb,var(--bc,var(--accent)) 35%,var(--line))}.bk .th{border:1px solid var(--line);border-inline-start:8px solid var(--bc,var(--accent))}.bk b{font-size:16px;margin-top:10px}.bk .st{display:block;margin-top:2px}.bk.nw{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:6px;background:transparent;border:2px dashed color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:none;color:var(--accent);font-size:15px;font-weight:700}.bk.nw i{font-style:normal;font-size:44px;line-height:1}
 #top{background:var(--grad)}#bar{position:relative;border-bottom:0}#bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad)}#dock{border-top:3px solid transparent;border-image:var(--grad) 1}
-@media (orientation:landscape) and (min-width:99999px){#dock{border-image:none;border-top:0}}
 #pnm .sc{display:flex;flex-direction:column;gap:8px;overflow:auto;max-height:min(62vh,430px)}#pnm .od{border:1px solid var(--line);border-radius:9px;background:var(--card);cursor:pointer}#pnm .mv{display:flex;gap:3px;margin-top:3px}#pnm .mv button{padding:0 7px;font-size:11px;height:22px;min-width:0}#pnm .mv button:disabled{opacity:.3}#pnm .q{top:2px;left:2px}
 #lzbar{padding:6px;max-width:min(290px,94vw)}#lzbar>.st{display:none}#lzbar .lzs{width:22px!important;height:22px!important;min-width:22px!important;border-width:1.5px}#lzbar .row{gap:5px!important}#lzM{margin-top:6px!important}#lzM button{padding:3px 8px;font-size:12px}#lzTW .st{margin:6px 0 2px!important;font-size:11px}
 #bkB{display:inline-flex;align-items:center;justify-content:center}#pi{pointer-events:auto;cursor:pointer}#pi::before{content:"▦ "}
 #pgs{left:10px;right:10px;top:calc(var(--bh,56px) + env(safe-area-inset-top,0px) + 8px);bottom:10px;overflow:auto;z-index:30;padding:0 12px 12px;max-width:900px;margin-inline:auto}#pgs .pgh{position:sticky;top:0;background:var(--card);display:flex;gap:8px;align-items:center;padding:10px 0;z-index:2}#pgs .pgh b{flex:1}.pgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-top:8px}.pgc{position:relative;text-align:center;border:2px solid transparent;border-radius:10px;padding:4px;touch-action:pan-y}.pgc.cur{border-color:var(--accent)}.pgc.drg{z-index:5;opacity:.9;box-shadow:0 8px 24px rgba(0,0,0,.35)}.pgc.tgt{border-color:#5b8cff}.pgc .th{pointer-events:none}
-@media (orientation:landscape) and (min-width:99999px){#pgs{left:calc(var(--dkw,80px) + 10px);margin-inline:0;max-width:none}}
 #rul{position:fixed;z-index:8;pointer-events:none;border:1.5px solid var(--accent);border-radius:6px;background:linear-gradient(rgba(59,130,246,.14),rgba(59,130,246,.14)),repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 10px) top/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 50px) top/100% 13px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 10px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 50px) bottom/100% 13px no-repeat;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--accent)}#rul .h{position:absolute;width:38px;height:38px;border-radius:50%;background:var(--card);border:2px solid var(--accent);color:var(--accent);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.25)}#rul .hm{left:50%;top:50%;margin:-19px 0 0 -19px}#rul .hr{right:-22px;top:50%;margin-top:-19px}
 /* ===== v40: واجهة داكنة احترافية ===== */
 :root{color-scheme:light;--grad:none;--shadow:0 10px 30px rgba(30,50,90,.14)}
@@ -217,7 +214,7 @@ button.primary,#top #plusB{background:var(--grad);border-color:transparent;color
 <body>
 <div id="lib" hidden>
   <div id="top"><h1>✍️ دفاتري</h1><input id="q" type="search" placeholder="🔍 ابحث عن دفتر أو وسم"><button id="plusB">＋</button><button id="bkB" title="نسخة احتياطية" aria-label="نسخة احتياطية"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg></button></div><div id="acts" hidden><button id="newB" class="primary">＋ دفتر جديد</button><button id="impB">📎 استيراد PDF كدفتر</button><button id="nfB">📁 مجلد جديد</button></div>
-  <div id="recent" hidden><div class="sec">🕘 آخر ما فتحته</div><div class="rrow" id="rrow"></div></div><div id="bkNote" class="st" style="padding:6px 4px;cursor:pointer"></div><div id="crumb" class="row" style="margin-top:12px"></div><div id="tagbar" class="row" style="margin-top:8px"></div><div id="vbar" class="row" style="margin-top:8px;justify-content:space-between"></div><div class="grid" id="grid"></div>
+  <div id="recent" hidden><div class="sec">🕘 آخر ما فتحته</div><div class="rrow" id="rrow"></div></div><div id="bkNote" class="st" style="padding:6px 4px;cursor:pointer"></div><div id="stNote" class="st" style="padding:2px 4px 6px;cursor:pointer;color:#c97a00" hidden></div><div id="crumb" class="row" style="margin-top:12px"></div><div id="tagbar" class="row" style="margin-top:8px"></div><div id="vbar" class="row" style="margin-top:8px;justify-content:space-between"></div><div class="grid" id="grid"></div>
 </div>
 <div id="ed" hidden>
   <div id="bar"><button id="back" title="المكتبة">→</button><input id="title" placeholder="اسم الدفتر"><span id="pi"></span><button id="undoB" title="تراجع">↶</button><button id="redoB" title="إعادة">↷</button><button id="bmB" title="علّم الصفحة">☆</button><button id="calcB" title="حاسبة ورسم">🧮</button><button id="shB" title="مشاركة" aria-label="مشاركة"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8"/></svg></button><button id="addB" title="إضافة" aria-label="إضافة"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button><button id="moreB" title="المزيد">⋯</button>
@@ -719,8 +716,10 @@ function createCalc(init){
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
-<script>
+<script id="appjs">
 (function(){
+const bsig=(css,js)=>{let x=2166136261,n=0;for(const e of [css,js]){const t=e?e.textContent:'';for(let i=0;i<t.length;i++)x=Math.imul(x^t.charCodeAt(i),16777619);n+=t.length}return(x>>>0).toString(36)+'.'+n};
+const BUILD0=(()=>{try{return bsig(document.getElementById('appcss'),document.getElementById('appjs'))}catch(e){return''}})();
 const $=id=>document.getElementById(id),uid=()=>Math.random().toString(36).slice(2,9);
 const mk=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const idb=new Promise(r=>{try{const q=indexedDB.open('gnb',1);q.onupgradeneeded=()=>q.result.createObjectStore('k');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
@@ -736,7 +735,7 @@ let LZD=+SET.lzd>=.5&&+SET.lzd<=8?+SET.lzd:2.2,LZM=['fade','hold','hover'].inclu
 const saveSet=()=>{try{localStorage.setItem('nbset',JSON.stringify({po,color,width,er:ER,lsMode,snap:snapOn,pens:PENS,ord:ORD,lzC,pcol:PCOL,hlo:HLO,hls:HLS,lzd:LZD,lzm:LZM,hltt:HLTT,hp:(typeof HIDP!=='undefined'&&HIDP)||[]}))}catch(e){}};
 let IDBH=null;idb.then(d=>{IDBH=d});
 const putNow=()=>{try{if(IDBH){IDBH.transaction('k','readwrite').objectStore('k').put(S,'lib');return}}catch(e){}dbq('put','lib',S)};
-const save=()=>{clearTimeout(st);st=setTimeout(()=>{st=0;putNow()},500)};
+let NOMOD=0;const save=()=>{if(book&&!NOMOD)book.mod=Date.now();clearTimeout(st);st=setTimeout(()=>{st=0;putNow()},500)};
 const flushSave=()=>{if(st){clearTimeout(st);st=0;putNow()}};
 addEventListener('pagehide',flushSave);addEventListener('beforeunload',flushSave);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flushSave()});
@@ -1521,8 +1520,8 @@ function mkPage(pg,idx){
   ['pointerup','pointercancel','lostpointercapture'].forEach(t=>cv.addEventListener(t,up));
   cv.addEventListener('pointerleave',()=>{const z=d.lz;if(z&&z.hov){z.hov=null;if(!z.raf)z.raf=requestAnimationFrame(lzDraw)}});
 }
-function renderBook(){ls=null;$('lsbar').hidden=true;io.disconnect();pagesEl.textContent='';DOM.clear();book.pages.forEach(mkPage);upd()}
-const upd=()=>{$('pi').textContent=(curPg+1)+' / '+book.pages.length;piShow();const p=book.pages[curPg];$('bmB').textContent=p&&p.bm?'⭐':'☆';lsInfo()};
+function renderBook(){if(curPg>=book.pages.length)curPg=Math.max(0,book.pages.length-1);ls=null;$('lsbar').hidden=true;io.disconnect();pagesEl.textContent='';DOM.clear();book.pages.forEach(mkPage);upd()}
+const upd=()=>{if(curPg>=book.pages.length)curPg=Math.max(0,book.pages.length-1);if(curPg<0)curPg=0;$('pi').textContent=(curPg+1)+' / '+book.pages.length;piShow();const p=book.pages[curPg];$('bmB').textContent=p&&p.bm?'⭐':'☆';lsInfo()};
 let scq=0;view.addEventListener('scroll',piShow,{passive:true});view.addEventListener('scroll',()=>{if(scq||!book)return;scq=requestAnimationFrame(()=>{scq=0;const ch=pagesEl.children;if(!ch.length)return;const m=view.getBoundingClientRect().top+view.clientHeight/2,dist=i=>{const r=ch[i].getBoundingClientRect();return Math.abs((r.top+r.bottom)/2-m)};let b=Math.min(curPg,ch.length-1),bd=dist(b);for(;;){let mv=false;if(b>0){const x=dist(b-1);if(x<bd){bd=x;b--;mv=true}}if(!mv&&b<ch.length-1){const x=dist(b+1);if(x<bd){bd=x;b++;mv=true}}if(!mv)break}if(b!==curPg){curPg=b;upd()}})});
 window.addEventListener('resize',()=>{if(!INKD)DOM.forEach(fit)});
 
@@ -1655,11 +1654,10 @@ document.querySelectorAll('#erM button').forEach(b=>b.onclick=()=>{ER.mode=b.dat
 $('erP').onclick=()=>{ER.pix=!ER.pix;erUI();saveSet()};$('erS').oninput=e=>{ER.size=+e.target.value;saveSet()};erUI();
 /* v26: style popover, contextual style row, dock-anchored panels, toast above dock */
 function DK(){const d=$('dock');return d?d.offsetHeight:128}
-const SIDE=matchMedia('(orientation:landscape) and (min-width:99999px)');
 function dockSync(){const r=document.documentElement.style,d=$('dock');r.setProperty('--dk',DK()+'px');if(d)r.setProperty('--dkw',d.offsetWidth+'px');r.setProperty('--bh',$('bar').offsetHeight+'px')}
 if(window.ResizeObserver){const ro=new ResizeObserver(dockSync);ro.observe($('dock'));ro.observe($('bar'))}addEventListener('resize',dockSync);dockSync();
 $('ed').append($('pi'));
-function placeToast(e){const d=$('dock');if(!d||!d.offsetHeight||SIDE.matches){e.style.bottom='24px';return}let top=d.getBoundingClientRect().top;document.querySelectorAll('.panel').forEach(p=>{if(p.hidden||p.id==='calc'||p.id==='dlg'||p.id==='pgs')return;const r=p.getBoundingClientRect();if(r.height&&r.bottom>top-60&&r.top<top)top=r.top});e.style.bottom=(innerHeight-top+8)+'px'}
+function placeToast(e){const d=$('dock');if(!d||!d.offsetHeight){e.style.bottom='24px';return}let top=d.getBoundingClientRect().top;document.querySelectorAll('.panel').forEach(p=>{if(p.hidden||p.id==='calc'||p.id==='dlg'||p.id==='pgs')return;const r=p.getBoundingClientRect();if(r.height&&r.bottom>top-60&&r.top<top)top=r.top});e.style.bottom=(innerHeight-top+8)+'px'}
 function stPrev(){const nc=tool==='eraser'||tool==='lasso'||isLz(tool);$('sw').style.display=nc?'none':'';$('stB').style.display=nc?'none':'';$('styl').classList.toggle('nx',nc);if(nc){$('stp').hidden=true;dockSync();return}const PW={hl:4,pencil:.8,fine:.45,marker:2.2,brush:1.8,hand:1.3},p=$('stP');p.setAttribute('stroke',color);p.setAttribute('stroke-width',Math.max(1,Math.min(16,width*(PW[tool]||1))));p.setAttribute('stroke-opacity',tool==='hl'?HLO:tool==='pencil'?.7:tool==='marker'?.85:1);dockSync()}
 $('stB').onclick=()=>{$('stp').hidden=!$('stp').hidden};
 ['styl','stp'].forEach(i=>['click','input'].forEach(ev=>$(i).addEventListener(ev,()=>setTimeout(stPrev,0))));
@@ -1703,7 +1701,7 @@ function mergeDlg(b){
       ['🔗 دمج داخل "'+nm(b)+'" وحذف "'+nm(c)+'"',()=>{
         b.pages.push(...c.pages);
         const t=[...new Set([...(b.tags||[]),...(c.tags||[])])];if(t.length)b.tags=t;
-        S.books=S.books.filter(z=>z!==c);b.ts=Date.now();
+        S.books=S.books.filter(z=>z!==c);b.ts=b.mod=Date.now();
         save();flushSave();showLib();gs('تم الدمج ✓ ('+b.pages.length+' صفحة)')}]])]))}
 function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('lzbar').hidden=true;
   book=null;$('ed').hidden=true;$('lib').hidden=false;$('calc').hidden=true;ls=null;$('lsbar').hidden=true;dlg.hidden=true;S.folders=S.folders||[];
@@ -1731,7 +1729,7 @@ function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('lzbar').hidden
     c.append(menu(f,[['✎ إعادة تسمية',()=>nameIn('اسم المجلد',f.name,v=>{f.name=v;save();showLib()})],['🎨 لون المجلد',()=>colMenu(f)],['🗑 حذف المجلد',()=>askDel(f.name,()=>{S.books.forEach(b=>{if(b.folderId===f.id)b.folderId=f.parent||null});S.folders.forEach(x=>{if(x.parent===f.id)x.parent=f.parent||null});S.folders=S.folders.filter(x=>x!==f);save();showLib()})]]),mk('div','fold','📁'),mk('b','',f.name),mk('span','st',n+' عنصر'));
     c.onclick=()=>{cwd=f.id;ftag=null;$('q').value='';showLib()};g.append(c)});
   S.books.filter(sb).sort(cmp).forEach(b=>{const c=mk('div','bk');c.style.setProperty('--bc',colOf(b));
-    c.append(menu(b,[[b.pin?'☆ إلغاء التثبيت':'⭐ تثبيت بالأعلى',()=>{b.pin=b.pin?0:1;save();showLib()}],['✎ إعادة تسمية',()=>nameIn('اسم الدفتر',b.title||'',v=>{b.title=v;save();showLib()})],['🏷 وسوم',()=>tagDlg(b)],['📁 نقل لمجلد',()=>moveDlg(b)],['🔗 دمج دفتر آخر داخله',()=>mergeDlg(b)],['🎨 لون الغلاف',()=>colMenu(b)],['🗑 حذف',()=>askDel(b.title||'دفتر',()=>{S.books=S.books.filter(z=>z!==b);save();showLib()})]]),thumb(b,240),mk('b','',(b.pin?'⭐ ':'')+(b.title||'بدون اسم')),mk('span','st',b.pages.length+' صفحة'+(b.ts?' · '+rel(b.ts):'')+((b.tags||[]).length?' · '+b.tags.join('، '):'')));
+    c.append(menu(b,[[b.pin?'☆ إلغاء التثبيت':'⭐ تثبيت بالأعلى',()=>{b.pin=b.pin?0:1;save();showLib()}],['✎ إعادة تسمية',()=>nameIn('اسم الدفتر',b.title||'',v=>{b.title=v;save();showLib()})],['🏷 وسوم',()=>tagDlg(b)],['📁 نقل لمجلد',()=>moveDlg(b)],['⤓ احفظ نسخة من هالدفتر',()=>exportAll(b)],['🔗 دمج دفتر آخر داخله',()=>mergeDlg(b)],['🎨 لون الغلاف',()=>colMenu(b)],['🗑 حذف',()=>askDel(b.title||'دفتر',()=>{S.books=S.books.filter(z=>z!==b);save();showLib()})]]),thumb(b,240),mk('b','',(b.pin?'⭐ ':'')+(b.title||'بدون اسم')),mk('span','st',b.pages.length+' صفحة'+(b.ts?' · '+rel(b.ts):'')+((b.tags||[]).length?' · '+b.tags.join('، '):'')));
     c.onclick=()=>open(b);g.append(c)});
   if(!g.children.length){const e=mk('div','empty');e.append(mk('div','emp1',flt?'🔍':'📓'),mk('div','',flt?'ما في نتائج':'هالمكان فاضي'));if(!flt){const nb=mk('button','primary empb','＋ ابدأ بدفتر جديد');nb.onclick=newSheet;e.append(nb)}g.append(e)}}
 $('q').oninput=showLib;
@@ -1787,6 +1785,7 @@ $('moreB').onclick=()=>pick('الدفتر',[
     ['▦ كل الصفحات',pgsOpen],['⛶ ملاءمة ارتفاع الصفحة',fitH],
     [TWO?'▯ صفحة وحدة':'▥ صفحتين جنب بعض',toggleTwo],
     ['🔍 تكبير',()=>$('zi').click()],['🔎 تصغير',()=>$('zo').click()],['↺ الحجم الأصلي 100%',()=>$('zr').click()]])],
+  ['⤓ احفظ نسخة من هالدفتر',()=>exportAll(book)],
   ['⚙ إعدادات اللمس ›',()=>pick('إعدادات اللمس',[
     ['✋ قلم فقط: '+($('po').checked?'مفعّل':'معطّل'),()=>{$('po').checked=!$('po').checked;$('po').onchange({target:$('po')});gs($('po').checked?'اللمس بالإصبع للتمرير فقط':'الإصبع يرسم كمان')}]])]]);
 let geoT='pent';
@@ -2050,22 +2049,35 @@ function newSheet(){
 /* v33: backup / restore, pages grid */
 function dlFile(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},4000)}
 const bkMark=()=>{try{localStorage.setItem('nbbk',String(Date.now()))}catch(e){}};
-async function exportAll(){
+async function exportAll(only){
+  const one=only&&Array.isArray(only.pages)?only:null,bks=one?[one]:S.books;
   gs('عم يجهّز النسخة…');flushSave();
-  const keys=new Set(),bgs={};S.books.forEach(b=>b.pages.forEach(p=>{if(p.bg)keys.add(p.bg);if(p.live)keys.add(p.live)}));
+  const keys=new Set(),bgs={};bks.forEach(b=>b.pages.forEach(p=>{if(p.bg)keys.add(p.bg);if(p.live)keys.add(p.live)}));
   for(const k of keys){const u=await dbq('get',k);if(u)bgs[k]=u}
-  let blob;try{blob=new Blob([JSON.stringify({app:'daftari',v:1,ts:Date.now(),lib:S,bgs,set:localStorage.getItem('nbset')})],{type:'application/json'})}catch(e){gs('حجم الدفاتر كبير على نسخة وحدة، جرّب نسخ جزء منها');return}
-  const name='daftari-backup-'+new Date().toISOString().slice(0,10)+'.json',file=new File([blob],name,{type:'application/json'}),mb=(blob.size/1048576).toFixed(1);
-  try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});bkMark();bkNote();gs('تم حفظ النسخة ✓');return}}catch(e){if(e&&e.name==='AbortError')return}
-  dlFile(blob,name);bkMark();bkNote();gs('نزّلت النسخة ✓ ('+mb+' MB)')}
+  let blob;try{blob=new Blob([JSON.stringify(one?{app:'daftari',v:1,ts:Date.now(),lib:{books:[one],folders:[]},bgs}:{app:'daftari',v:1,ts:Date.now(),lib:S,bgs,set:localStorage.getItem('nbset'),pal:localStorage.getItem('nbpalc')})],{type:'application/json'})}catch(e){gs(one?'حجم هالدفتر كبير، جرّب تقسّمه لدفترين':'حجم الدفاتر كبير على نسخة وحدة، جرّب تحفظ كل دفتر لحاله (من ⋯ على الدفتر)');return}
+  const name=(one?'daftari-'+((one.title||'دفتر').replace(/[\\\/:*?"<>|\s]+/g,'-').slice(0,40)||'دفتر'):'daftari-backup')+'-'+new Date().toISOString().slice(0,10)+'.json',file=new File([blob],name,{type:'application/json'}),mb=(blob.size/1048576).toFixed(1);
+  try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file]});if(!one){bkMark();bkNote()}gs('تم حفظ النسخة ✓');return}}catch(e){if(e&&e.name==='AbortError')return}
+  dlFile(blob,name);if(!one){bkMark();bkNote()}gs('نزّلت النسخة ✓ ('+mb+' MB)')}
 function importAll(file){file.text().then(async t=>{let d;try{d=JSON.parse(t)}catch(e){d=null}
   if(!d||d.app!=='daftari'||!d.lib||!Array.isArray(d.lib.books)){gs('هاد الملف مو نسخة دفاتر صالحة');return}
-  S.folders=S.folders||[];const hb=new Set(S.books.map(b=>b.id)),hf=new Set(S.folders.map(f=>f.id));let nb=0,nf=0;
+  S.folders=S.folders||[];const hb=new Map(S.books.map(b=>[b.id,b])),hf=new Set(S.folders.map(f=>f.id));let nb=0,nf=0;const nw=[];
+  const stp=b=>b.mod||b.ts||0,sm=(x,y)=>{try{return JSON.stringify(x.pages)===JSON.stringify(y.pages)}catch(e){return true}};
   (d.lib.folders||[]).forEach(f=>{if(!hf.has(f.id)){S.folders.push(f);hf.add(f.id);nf++}});
-  d.lib.books.forEach(b=>{if(!hb.has(b.id)){if(b.folderId&&!hf.has(b.folderId))b.folderId=null;S.books.push(b);nb++}});
+  d.lib.books.forEach(b=>{const l=hb.get(b.id);if(b.folderId&&!hf.has(b.folderId))b.folderId=null;
+    if(!l){S.books.push(b);nb++}else if(stp(b)>stp(l)&&!sm(l,b))nw.push([l,b])});
   S.folders.forEach(f=>{if(f.parent&&!hf.has(f.parent))f.parent=null});
   for(const k in(d.bgs||{}))await dbq('put',k,d.bgs[k]);
-  save();flushSave();showLib();gs(nb||nf?'انستعاد '+nb+' دفتر و'+nf+' مجلد ✓':'كل الدفاتر بالنسخة موجودة أصلًا')}).catch(()=>gs('تعذّرت قراءة الملف'))}
+  const okS=s=>{try{return typeof s==='string'&&!!s&&typeof JSON.parse(s)==='object'}catch(e){return false}};
+  const askSet=()=>{const a=okS(d.set)&&d.set!==localStorage.getItem('nbset'),p=okS(d.pal)&&d.pal!==localStorage.getItem('nbpalc');if(!a&&!p)return;
+    pick('استعادة إعدادات الأقلام ولوحة الألوان من النسخة؟ (بيعيد تشغيل الصفحة)',[['✓ نعم، استعدها',()=>{try{if(a)localStorage.setItem('nbset',d.set);if(p)localStorage.setItem('nbpalc',d.pal)}catch(e){}flushSave();setTimeout(()=>location.reload(),300)}],['لا، خلّيها متل ما هي',()=>{}]])};
+  save();flushSave();showLib();
+  gs(nb||nf?'انستعاد '+nb+' دفتر و'+nf+' مجلد ✓':nw.length?'في دفاتر أحدث بالنسخة، شوف الخيارات':'كل الدفاتر بالنسخة موجودة أصلًا');
+  if(nw.length){pick('في '+nw.length+' دفتر نسخته بالملف أحدث من اللي عندك',[['↻ استبدلهم بالأحدث (بنحتفظ بنسختك القديمة كدفتر جنبه)',()=>{
+      nw.forEach(([l,b])=>{const c=JSON.parse(JSON.stringify(l));c.id=uid();c.title=(l.title||'دفتر')+' (قبل الاستعادة)';c.pin=0;(c.pages||[]).forEach(p=>p.id=uid());
+        b.folderId=l.folderId||null;const i=S.books.indexOf(l);if(i>=0)S.books[i]=b;else S.books.push(b);S.books.push(c)});
+      save();flushSave();showLib();gs('تحدّث '+nw.length+' دفتر بالأحدث ✓ (القديم انحفظ كدفتر جنبه)');askSet()}],
+    ['خلّي اللي عندي',()=>askSet()]])}
+  else askSet()}).catch(()=>gs('تعذّرت قراءة الملف'))}
 const bkIn=document.createElement('input');bkIn.type='file';bkIn.accept='.json,application/json';bkIn.hidden=true;document.body.append(bkIn);bkIn.onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)importAll(f)};
 const bkMenu=()=>pick('النسخ الاحتياطي',[['⤓ احفظ نسخة احتياطية',exportAll],['⤒ استعادة من ملف (بيدمج وما بيحذف شي)',()=>bkIn.click()]]);
 $('bkB').onclick=bkMenu;$('bkNote').onclick=bkMenu;
@@ -2079,15 +2091,24 @@ var pgs0;
 function pgsBuild(){const P=$('pgs'),top=P.scrollTop;P.textContent='';
   const hd=mk('div','pgh'),t=mk('b','','الصفحات ('+book.pages.length+')'),ad=mk('button','','＋ صفحة'),cl=mk('button','','✕');
   ad.onclick=()=>{const c0=book.pages[curPg]||{},tp0=c0.bg?'lined':(c0.tpl||'lined');book.pages.splice(curPg+1,0,newPage({tpl:tp0}));curPg++;renderBook();upd();save();pgsBuild();gs('انضافت صفحة فارغة بعد الحالية ('+(curPg+1)+')')};const ad2=mk('button','','⋯');ad2.title='اختيار نوع الصفحة';ad2.onclick=()=>{$('addP').click();setTimeout(pgsBuild,120)};cl.onclick=()=>P.hidden=true;
-  const sb=mk('button',pgSelMode?'on':'',pgSelMode?'إنهاء التحديد':'☑ تحديد');sb.title='حدد صفحات لمشاركتها';sb.onclick=()=>{pgSelMode=!pgSelMode;if(!pgSelMode)pgSel=new Set();pgsBuild()};
+  const sb=mk('button',pgSelMode?'on':'',pgSelMode?'إنهاء التحديد':'☑ تحديد');sb.title='حدد صفحات (مشاركة، تكرار، حذف)';sb.onclick=()=>{pgSelMode=!pgSelMode;if(!pgSelMode)pgSel=new Set();pgsBuild()};
   const N0=book.pages.length,hd0=()=>pgSelMode?('محدد '+pgSel.size+' من '+N0):'الصفحات ('+N0+')';if(pgSelMode)t.textContent=hd0();
   hd.append(t,...(pgSelMode?[sb]:[sb,ad,ad2]),cl);
-  const ar=mk('div','row'),aAll=mk('button','','الكل'),aNone=mk('button','','لا شي'),aShare=mk('button','primary','');
-  const upSel=()=>{t.textContent=hd0();aShare.textContent='📤 مشاركة ('+pgSel.size+')';aShare.disabled=!pgSel.size};
+  const ar=mk('div','row'),aAll=mk('button','','الكل'),aNone=mk('button','','لا شي'),aShare=mk('button','primary',''),aDup=mk('button','',''),aDel=mk('button','danger','');
+  const upSel=()=>{t.textContent=hd0();aShare.textContent='📤 مشاركة ('+pgSel.size+')';aShare.disabled=!pgSel.size;aDup.textContent='⧉ تكرار ('+pgSel.size+')';aDup.disabled=!pgSel.size;aDel.textContent='🗑 حذف ('+pgSel.size+')';aDel.disabled=!pgSel.size};
   aAll.onclick=()=>{book.pages.forEach(pg=>pgSel.add(pg));gr.querySelectorAll('.pgc').forEach(c=>c.classList.add('sel'));upSel()};
   aNone.onclick=()=>{pgSel.clear();gr.querySelectorAll('.pgc').forEach(c=>c.classList.remove('sel'));upSel()};
   aShare.onclick=()=>{const idx=[...pgSel].map(pg=>book.pages.indexOf(pg)).filter(i=>i>=0).sort((a,b)=>a-b);if(!idx.length){gs('المس صفحة وحدة على الأقل');return}shareDlg(idx)};
-  ar.style.flexWrap='wrap';ar.append(aShare,aAll,aNone);
+  aDup.onclick=()=>{const n=book.pages.filter(pg=>pgSel.has(pg)).length;if(!n){gs('المس صفحة وحدة على الأقل');return}
+    const cur=book.pages[curPg],all=[];book.pages.forEach(pg=>{all.push(pg);if(pgSel.has(pg)){const c=JSON.parse(JSON.stringify(pg));c.id=uid();delete c.bm;all.push(c)}});
+    book.pages.splice(0,book.pages.length,...all);curPg=Math.max(0,all.indexOf(cur));renderBook();upd();save();pgsBuild();gs('انعمل '+n+' نسخة، كل نسخة بعد صفحتها ✓')};
+  aDel.onclick=()=>{const n=book.pages.filter(pg=>pgSel.has(pg)).length;if(!n){gs('المس صفحة وحدة على الأقل');return}
+    if(n>=book.pages.length){gs('لازم تضل صفحة وحدة بالدفتر');return}
+    pick('حذف '+n+' صفحة من الدفتر ؟ (ما في تراجع)',[['🗑 نعم، احذفهم',()=>{
+      const cur=book.pages[curPg],keep=book.pages.filter(pg=>!pgSel.has(pg));let ni=keep.indexOf(cur);
+      if(ni<0){ni=0;for(let i=0;i<curPg;i++)if(!pgSel.has(book.pages[i]))ni++;ni=Math.min(ni,keep.length-1)}
+      book.pages.splice(0,book.pages.length,...keep);curPg=ni;pgSel=new Set();undo=[];redo=[];renderBook();upd();save();pgsBuild();gs('انحذفت '+n+' صفحة ✓')}]])};
+  ar.style.flexWrap='wrap';ar.append(aShare,aDup,aDel,aAll,aNone);
   const gr=mk('div','pgg');
   const io2=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io2.unobserve(en.target);const cv=en.target,pg=cv._pg,w=cv.width,dr=()=>drawPage(cv.getContext('2d'),pg,w);dr();if(pg.bg)loadBg(pg.bg).then(dr);(pg.items||[]).filter(x=>x.k==='i').forEach(x=>{const m=itImg(x);if(!m.complete)m.addEventListener('load',dr)})}),{root:P});
   book.pages.forEach((pg,i)=>{const c=mk('div','pgc'+(i===curPg?' cur':'')+(pgSelMode&&pgSel.has(pg)?' sel':'')),cv=mk('canvas','th');cv.width=150;cv.height=Math.round(150*pg.ar);cv._pg=pg;io2.observe(cv);c.dataset.i=i;c.append(cv,mk('span','st',(pg.bm?'⭐ ':'')+(i+1)));gr.append(c)});
@@ -2103,7 +2124,7 @@ function pgsBuild(){const P=$('pgs'),top=P.scrollTop;P.textContent='';
     if(d.t!=null&&d.t!==d.i){const[p]=book.pages.splice(d.i,1);book.pages.splice(d.t,0,p);renderBook();curPg=d.t;upd();save();gs('انتقلت الصفحة لمكان '+(d.t+1))}
     pgsBuild()};
   gr.addEventListener('pointerup',end);gr.addEventListener('pointercancel',end);
-  P.append(hd,...(pgSelMode?[ar]:[]),mk('div','st',pgSelMode?'المس الصفحات اللي بدك تشاركها (مثلاً 1 و 3)، وبعدين اضغط مشاركة':'اضغط صفحة للانتقال إليها، واضغط مطوّلاً واسحب لتغيير مكانها'),gr);if(pgSelMode)upSel();P.scrollTop=top}
+  P.append(hd,...(pgSelMode?[ar]:[]),mk('div','st',pgSelMode?'المس الصفحات اللي بدك (مثلاً 1 و 3)، وبعدين اضغط مشاركة أو تكرار أو حذف':'اضغط صفحة للانتقال إليها، واضغط مطوّلاً واسحب لتغيير مكانها'),gr);if(pgSelMode)upSel();P.scrollTop=top}
 $('pi').onclick=()=>pgsOpen();
 
 /* v34: ruler */
@@ -2129,12 +2150,12 @@ function movePen(k,d){const g=penGroup().map(pkey),i=g.indexOf(k),j=i+d;if(i<0||
 function pnmBuild(){const P0=$('pnm');P0.textContent='';const P=mk('div','sc');P0.append(P);
   const ico=el=>el?(el.querySelector('svg')||{outerHTML:''}).outerHTML:'';
   const tile=(html,label,on,fn)=>{const b=mk('button','t'+(on?' on':''));b.innerHTML=html+'<span>'+label+'</span>';b.onclick=fn;return b};
-  const sd=SIDE.matches,grp=penGroup();
-  P.append(mk('div','st','ترتيب الشريط ('+(sd?'▲ ▼':'◀ ▶')+' لتحريك القلم، ✕ لإزالة المثبّت)'));
+  const grp=penGroup();
+  P.append(mk('div','st','ترتيب الشريط (◀ ▶ لتحريك القلم، ✕ لإزالة المثبّت)'));
   const og=mk('div','g');grp.forEach((b,i)=>{const pin=b.dataset.x?PENS.find(s=>s.id===b.dataset.x):null,k=pkey(b);
     const c=mk('div','t od'+(b.classList.contains('on')?' on':''));c.innerHTML=ico(b)+(pin?'<i class="cd" style="background:'+pin.c+'"></i>':'')+'<span>'+PTN[b.dataset.t]+'</span>';
     c.onclick=()=>{P0.hidden=true;selTool(b)};
-    const r=mk('div','mv'),A=mk('button','',sd?'▲':'▶'),Z=mk('button','',sd?'▼':'◀');
+    const r=mk('div','mv'),A=mk('button','','▶'),Z=mk('button','','◀');
     A.onclick=e=>{e.stopPropagation();movePen(k,-1)};Z.onclick=e=>{e.stopPropagation();movePen(k,1)};A.disabled=i===0;Z.disabled=i===grp.length-1;r.append(A,Z);c.append(r);
     if(pin){const x=mk('button','q del','✕');x.onclick=e=>{e.stopPropagation();delPen(pin.id);pnmBuild()};c.append(x)}og.append(c)});P.append(og);
   P.append(mk('div','st','كل الأقلام (＋ يثبّت القلم بالشريط بلونك وسماكتك الحاليين)'));
@@ -2243,9 +2264,24 @@ document.addEventListener('pointerdown',e=>{
   {const o=showLib;showLib=function(){o();setTimeout(nag,1500)}}
   setTimeout(nag,2500)
 })();
-/* (4) new-version notice: compares the app-version stamp of the live page with the running one */
+/* storage-eviction warning: shown only when the browser did not grant persistent storage and the app is not installed to the home screen */
+(()=>{const DAY=864e5,K='nbpst';let bad=false;
+  const sa=()=>{try{return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches}catch(e){return false}};
+  const snz=()=>{try{return +localStorage.getItem(K)||0}catch(e){return 0}};
+  function stNote(){const e=$('stNote');if(!e)return;const on=bad&&!sa()&&S.books&&S.books.length&&Date.now()>snz();e.hidden=!on;if(on)e.textContent='⚠ المتصفح ما ضمن يحتفظ ببيانات دفاترك للأبد (اضغط للتفاصيل)'}
+  async function probe(){try{const st=navigator.storage;let p=false;if(st&&st.persisted)p=await st.persisted();if(!p&&st&&st.persist)p=await st.persist();bad=!p}catch(e){bad=true}stNote()}
+  $('stNote').onclick=()=>pick('تخزين الدفاتر',[
+    'دفاترك محفوظة داخل المتصفح بس. لو ما استعملت التطبيق فترة، المتصفح ممكن يمسح بياناته حتى لو ما مسحتها أنت.',
+    'الأفضل: افتح التطبيق من أيقونة على الشاشة الرئيسية (زر المشاركة ← إضافة إلى الشاشة الرئيسية)، وخلّي عندك نسخة احتياطية حديثة.',
+    ['💾 احفظ نسخة احتياطية الآن',()=>exportAll()],
+    ['فهمت، لا تذكّرني أسبوعين',()=>{try{localStorage.setItem(K,String(Date.now()+14*DAY))}catch(e){}stNote()}]]);
+  {const o=showLib;showLib=function(){o();stNote()}}
+  setTimeout(probe,3000)
+})();
+/* (4) new-version notice: automatic. Compares a fingerprint of the app's code+styles (computed when this page loaded) with the live file; the app-version meta is still honoured as a fallback */
 (()=>{if(location.protocol==='file:'||!window.fetch)return;
-  const cur=(document.querySelector('meta[name=app-version]')||{}).content;if(!cur)return;
+  const cur=(document.querySelector('meta[name=app-version]')||{}).content;
+  if(!cur&&!BUILD0)return;
   let last=0,shown=false;
   function show(){shown=true;
     const bx=mk('div','panel');bx.id='updBar';bx.style.cssText='top:calc(10px + env(safe-area-inset-top,0px));bottom:auto;left:50%;transform:translateX(-50%);width:min(420px,94vw);z-index:55;display:flex;flex-direction:column;gap:8px';
@@ -2258,7 +2294,9 @@ document.addEventListener('pointerdown',e=>{
   async function chk(){
     if(shown||!navigator.onLine||Date.now()-last<120000)return;last=Date.now();
     try{const r=await fetch(location.pathname,{cache:'no-store'});if(!r.ok)return;const t=await r.text();
-      const m=t.match(/name=["']app-version["']\s+content=["']([^"']+)["']/);if(m&&m[1]!==cur)show()}catch(e){}
+      const m=t.match(/name=["']app-version["']\s+content=["']([^"']+)["']/);
+      if(cur&&m&&m[1]!==cur){show();return}
+      if(BUILD0){const d=new DOMParser().parseFromString(t,'text/html'),js=d.getElementById('appjs');if(js&&bsig(d.getElementById('appcss'),js)!==BUILD0)show()}}catch(e){}
   }
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});
   setInterval(chk,600000);setTimeout(chk,4000)
@@ -2295,8 +2333,8 @@ const mvPg=d=>{const i=curPg,j=i+d,a=book.pages;if(j<0||j>=a.length)return;[a[i]
 $('mvU').onclick=()=>mvPg(-1);$('mvD').onclick=()=>mvPg(1);
 $('bmB').onclick=()=>{const p=book.pages[curPg];p.bm=!p.bm;upd();save();gs(p.bm?'تم تعليم الصفحة '+(curPg+1):'انشالت الإشارة')};
 $('bmL').onclick=()=>{const L=book.pages.map((p,i)=>p.bm?[ '⭐ صفحة '+(i+1),()=>pagesEl.children[i].scrollIntoView({block:'start'})]:null).filter(Boolean);if(!L.length){gs('ما في صفحات معلّمة، اضغط ☆ لتعليم صفحة');return}pick('الصفحات المعلّمة',L)};
-function open(b){$('erbar').hidden=tool!=='eraser';$('lsm').hidden=tool!=='lasso';$('lzbar').hidden=!isLz(tool);book=b;b.ts=Date.now();undo=[];redo=[];curPg=0;$('lib').hidden=true;$('ed').hidden=false;$('title').value=b.title;renderBook();view.scrollTop=0;save()}
-$('back').onclick=()=>{save();showLib()};
+function open(b){$('erbar').hidden=tool!=='eraser';$('lsm').hidden=tool!=='lasso';$('lzbar').hidden=!isLz(tool);book=b;b.ts=Date.now();undo=[];redo=[];curPg=0;$('lib').hidden=true;$('ed').hidden=false;$('title').value=b.title;renderBook();view.scrollTop=0;NOMOD=1;save();NOMOD=0}
+$('back').onclick=()=>{NOMOD=1;save();NOMOD=0;showLib()};
 
 let impTarget=null;
 $('impB').onclick=()=>{impTarget='new';$('pdfIn').click()};$('pdfAdd').onclick=()=>{impTarget='cur';$('pdfIn').click()};
