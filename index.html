@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f3f6fb">
+<meta name="app-version" content="5">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -105,16 +106,16 @@ textarea,.cin{width:100%;font-family:ui-monospace,Menlo,monospace;direction:ltr;
 #pages{padding-top:16px;padding-bottom:20px}
 #calc{transform-origin:top left}#calc.mini{width:auto;padding:0;border-radius:999px;overflow:visible;max-height:none}#calc.mini>.row,#calc.mini #cc,#calc.mini #gg{display:none!important}#kchip{position:fixed;z-index:70;pointer-events:none;transform:translate(-50%,-130%);background:var(--accent);color:#fff;font:700 20px ui-monospace,Menlo,monospace;direction:ltr;padding:6px 14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35)}.page.kdp{outline:3px dashed var(--accent);outline-offset:-3px}#kbub{display:none;align-items:center;gap:6px;min-width:52px;height:52px;padding:0 16px;font-size:22px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}#calc.mini #kbub{display:flex}#kbv{font:700 13px ui-monospace,Menlo,monospace;direction:ltr;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}#krs{position:sticky;display:flex;align-items:center;justify-content:center;width:34px;height:34px;margin:4px -6px -6px auto;float:right;touch-action:none;cursor:nwse-resize;color:var(--mute);font-size:20px;line-height:1;user-select:none;-webkit-user-select:none;border-radius:50%;background:color-mix(in srgb,var(--card) 80%,transparent)}#calc.mini #krs{display:none}#calc .row button.sm{min-width:34px;padding:6px 8px}
 #pages.two{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:12px;width:100%}#pages.two .page{margin:0 0 14px}
-@media (orientation:landscape) and (min-width:700px){#ed:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr)}#bar{grid-column:1/-1}#view{grid-column:1;grid-row:2;min-width:0}#dock{grid-column:2;grid-row:2;width:80px;overflow-y:auto;overflow-x:hidden;border-top:0;border-right:1px solid var(--line);box-shadow:none;padding:6px 4px;align-items:center}#tools,#styl{flex-direction:column;overflow:visible}#tools button{width:100%}#tools i{width:24px;height:1px;margin:3px 0}#sw{flex-wrap:wrap!important;justify-content:center}#styl{gap:8px}#pi{left:calc(var(--dkw,80px) + 10px)}#lsm,#erbar,#lzbar,#stp,#pnm{bottom:12px!important;top:auto!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important;max-height:calc(100% - 90px)}#lsbar{bottom:auto!important;top:calc(var(--bh,56px) + 10px)!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important}#pnm::after{display:none}}
+@media (orientation:landscape) and (min-width:99999px){#ed:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr)}#bar{grid-column:1/-1}#view{grid-column:1;grid-row:2;min-width:0}#dock{grid-column:2;grid-row:2;width:80px;overflow-y:auto;overflow-x:hidden;border-top:0;border-right:1px solid var(--line);box-shadow:none;padding:6px 4px;align-items:center}#tools,#styl{flex-direction:column;overflow:visible}#tools button{width:100%}#tools i{width:24px;height:1px;margin:3px 0}#sw{flex-wrap:wrap!important;justify-content:center}#styl{gap:8px}#pi{left:calc(var(--dkw,80px) + 10px)}#lsm,#erbar,#lzbar,#stp,#pnm{bottom:12px!important;top:auto!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important;max-height:calc(100% - 90px)}#lsbar{bottom:auto!important;top:calc(var(--bh,56px) + 10px)!important;right:auto!important;left:calc(var(--dkw,80px) + 10px)!important}#pnm::after{display:none}}
 
 :root{--grad:linear-gradient(135deg,#6c5ce7,#5b8cff)}#lib{max-width:1200px}.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}.rc{flex:0 0 170px}.bk{border-top:1px solid var(--line);border-radius:16px;padding:12px;background:color-mix(in srgb,var(--bc,var(--accent)) 12%,var(--card));border-color:color-mix(in srgb,var(--bc,var(--accent)) 35%,var(--line))}.bk .th{border:1px solid var(--line);border-inline-start:8px solid var(--bc,var(--accent))}.bk b{font-size:16px;margin-top:10px}.bk .st{display:block;margin-top:2px}.bk.nw{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:6px;background:transparent;border:2px dashed color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:none;color:var(--accent);font-size:15px;font-weight:700}.bk.nw i{font-style:normal;font-size:44px;line-height:1}
 #top{background:var(--grad)}#bar{position:relative;border-bottom:0}#bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad)}#dock{border-top:3px solid transparent;border-image:var(--grad) 1}
-@media (orientation:landscape) and (min-width:700px){#dock{border-image:none;border-top:0}}
+@media (orientation:landscape) and (min-width:99999px){#dock{border-image:none;border-top:0}}
 #pnm .sc{display:flex;flex-direction:column;gap:8px;overflow:auto;max-height:min(62vh,430px)}#pnm .od{border:1px solid var(--line);border-radius:9px;background:var(--card);cursor:pointer}#pnm .mv{display:flex;gap:3px;margin-top:3px}#pnm .mv button{padding:0 7px;font-size:11px;height:22px;min-width:0}#pnm .mv button:disabled{opacity:.3}#pnm .q{top:2px;left:2px}
 #lzbar{padding:6px;max-width:min(290px,94vw)}#lzbar>.st{display:none}#lzbar .lzs{width:22px!important;height:22px!important;min-width:22px!important;border-width:1.5px}#lzbar .row{gap:5px!important}#lzM{margin-top:6px!important}#lzM button{padding:3px 8px;font-size:12px}#lzTW .st{margin:6px 0 2px!important;font-size:11px}
 #bkB{display:inline-flex;align-items:center;justify-content:center}#pi{pointer-events:auto;cursor:pointer}#pi::before{content:"▦ "}
 #pgs{left:10px;right:10px;top:calc(var(--bh,56px) + env(safe-area-inset-top,0px) + 8px);bottom:10px;overflow:auto;z-index:30;padding:0 12px 12px;max-width:900px;margin-inline:auto}#pgs .pgh{position:sticky;top:0;background:var(--card);display:flex;gap:8px;align-items:center;padding:10px 0;z-index:2}#pgs .pgh b{flex:1}.pgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-top:8px}.pgc{position:relative;text-align:center;border:2px solid transparent;border-radius:10px;padding:4px;touch-action:pan-y}.pgc.cur{border-color:var(--accent)}.pgc.drg{z-index:5;opacity:.9;box-shadow:0 8px 24px rgba(0,0,0,.35)}.pgc.tgt{border-color:#5b8cff}.pgc .th{pointer-events:none}
-@media (orientation:landscape) and (min-width:700px){#pgs{left:calc(var(--dkw,80px) + 10px);margin-inline:0;max-width:none}}
+@media (orientation:landscape) and (min-width:99999px){#pgs{left:calc(var(--dkw,80px) + 10px);margin-inline:0;max-width:none}}
 #rul{position:fixed;z-index:8;pointer-events:none;border:1.5px solid var(--accent);border-radius:6px;background:linear-gradient(rgba(59,130,246,.14),rgba(59,130,246,.14)),repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 10px) top/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 50px) top/100% 13px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 10px) bottom/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(59,130,246,.9) 0 1px,transparent 1px 50px) bottom/100% 13px no-repeat;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--accent)}#rul .h{position:absolute;width:38px;height:38px;border-radius:50%;background:var(--card);border:2px solid var(--accent);color:var(--accent);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.25)}#rul .hm{left:50%;top:50%;margin:-19px 0 0 -19px}#rul .hr{right:-22px;top:50%;margin-top:-19px}
 /* ===== v40: واجهة داكنة احترافية ===== */
 :root{color-scheme:light;--grad:none;--shadow:0 10px 30px rgba(30,50,90,.14)}
@@ -204,6 +205,13 @@ button.primary,#top #plusB{background:var(--grad);border-color:transparent;color
 .page{box-shadow:0 1px 3px rgba(30,50,90,.2),0 6px 16px rgba(30,50,90,.12)!important}
 .lvb{position:absolute;top:8px;right:8px;z-index:4;font-size:12px;padding:6px 11px;border-radius:16px;background:var(--card);border:1px solid var(--accent);color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.2);font-weight:600}
 #addEndOpt{margin-inline-start:6px}
+
+#tools button{position:relative}
+#tools.pe{padding:9px 9px 0}
+#tools.pe button.pej{animation:pj .3s infinite ease-in-out;touch-action:none}
+#tools.pe button.pdg{animation:none;z-index:6;box-shadow:0 8px 18px rgba(0,0,0,.28);background:var(--card)}
+@keyframes pj{0%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}100%{transform:rotate(-1.6deg)}}
+.pdx{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#e5484d;color:#fff;font:700 19px/20px system-ui,sans-serif;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.4);z-index:7;cursor:pointer}
 </style>
 </head>
 <body>
@@ -214,7 +222,7 @@ button.primary,#top #plusB{background:var(--grad);border-color:transparent;color
 <div id="ed" hidden>
   <div id="bar"><button id="back" title="المكتبة">→</button><input id="title" placeholder="اسم الدفتر"><span id="pi"></span><button id="undoB" title="تراجع">↶</button><button id="redoB" title="إعادة">↷</button><button id="bmB" title="علّم الصفحة">☆</button><button id="calcB" title="حاسبة ورسم">🧮</button><button id="shB" title="مشاركة" aria-label="مشاركة"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8"/></svg></button><button id="addB" title="إضافة" aria-label="إضافة"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button><button id="moreB" title="المزيد">⋯</button>
 <div id="acts2" hidden><button id="addP"></button><button id="tplB"></button><button id="delP"></button><button id="mvU"></button><button id="mvD"></button><button id="bmL"></button><button id="zo"></button><button id="zr">100%</button><button id="zi"></button><button id="pdfAdd"></button><button id="imgB"></button><button id="pgImg"></button><button id="pdfOut"></button><input type="checkbox" id="po" checked></div></div>
-  <div id="view"><div id="pages"></div><div style="text-align:center;padding:6px 0 60px"><button id="addEnd">＋ صفحة جديدة</button><button id="addEndOpt" title="خيارات: اختيار الشكل والمكان">⋯</button></div></div><div id="dock"><div id="tools"><button data-t="pen" title="حبر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.500L6.500 11C6 7.500 7.500 5 9 3.500h6c1.500 1.500 3 4 2.500 7.500z"/><path d="M12 21.500V13.500"/><circle cx="12" cy="12" r="1.300" fill="currentColor"/><path d="M9 3.500h6"/></svg><small>حبر</small></button><button data-t="ball" style="display:none" title="جاف"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="9.800" y="1" width="4.400" height="12.500" rx="1.400"/><path d="M9.800 13.500L12 20.500l2.200-7"/><path d="M14.200 3.500v5"/><circle cx="12" cy="21" r=".6" fill="currentColor"/></g><path d="M11 22.500h10" stroke-width="1.200"/></svg><small>جاف</small></button><button data-t="fine" style="display:none" title="قلم رفيع"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="10.400" y="1" width="3.200" height="10" rx="1"/><path d="M10.400 6h3.200"/><path d="M10.700 11l1.300 8 1.300-8"/><path d="M12 19v2.500" stroke-width=".8"/></g><path d="M11 22.500h10" stroke-width=".7"/></svg><small>رفيع</small></button><button data-t="pencil" style="display:none" title="رصاص"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><path d="M9 5.500V2.500a1 1 0 011-1h4a1 1 0 011 1v3"/><rect x="9" y="5.500" width="6" height="10"/><path d="M12 5.500v10"/><path d="M9 15.500L12 22l3-6.500"/><path d="M10.700 19.200h2.600"/></g><path d="M11 22.500h10" stroke-width="1.400" stroke-dasharray="1.500 2"/></svg><small>رصاص</small></button><button data-t="marker" title="ماركر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="8.500" y="1" width="7" height="11" rx="1.500"/><path d="M8.500 5.500h7"/><path d="M9.500 12v3.500l1.500 4.500h2l1.500-4.500V12"/></g><path d="M11 22.500h10" stroke-width="3.200"/></svg><small>ماركر</small></button><button data-t="brush" style="display:none" title="فرشاة"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="11" y="1" width="2" height="9.500" rx="1"/><rect x="10" y="10.500" width="4" height="3.500" rx=".6"/><path d="M10 14c-.6 3 .2 5.200 2 8 1.800-2.800 2.600-5 2-8z" fill="currentColor" fill-opacity=".8"/></g></svg><small>فرشاة</small></button><button data-t="laser" style="display:none" title="قلم ليزر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c4-1 8-5 12-11" stroke-width="2.2" opacity=".45"/><circle cx="17" cy="7" r="3" fill="currentColor"/><path d="M17 1.5v2M17 10.5v2M11.500 7h2M20.500 7h2"/></svg><small>قلم ليزر</small></button><button data-t="hl" title="تظليل"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="7.500" y="1" width="9" height="9.500" rx="1.500"/><path d="M7.500 10.500h9l-1.800 5H9.300z"/><path d="M9.300 15.500l1.200 3h3l1.200-3"/></g><path d="M10 22.500h11" stroke-width="4" opacity=".35"/></svg><small>تظليل</small></button><button id="penB" title="أقلام أكثر"><b style="font-size:15px;white-space:nowrap;line-height:1">✒ ▾</b><small>أقلام</small></button><i></i><button data-t="eraser" title="ممحاة"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.500 16.500l9-9a2 2 0 013 0l4 4a2 2 0 010 3l-6 6H7.500z"/><path d="M9 11l6 6"/><path d="M13.500 21h7"/></svg><small>ممحاة</small></button><i></i><button data-t="line" style="display:none" title="خط"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19L19 5"/></svg></button><button data-t="rect" style="display:none" title="مستطيل"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="1"/></svg></button><button data-t="ell" style="display:none" title="دائرة / قطع ناقص"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8.500" ry="6.500"/></svg></button><button id="shpB" title="أشكال أكثر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4l6 10H2z"/><rect x="11" y="9" width="10" height="10" rx="1"/></svg><small>أشكال</small></button><button id="rulB" title="مسطرة: ارسم على حافتها لخط مستقيم تمامًا"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="1.500"/><path d="M6 8v3M10 8v4.500M14 8v3M18 8v4.500"/></svg><small>مسطرة</small></button><i></i><button data-t="text" title="نص"><b style="font-size:20px;font-family:serif">T</b><small>نص</small></button><button data-t="lasso" title="تحديد"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c0-4 4-7 8-6s7 4 5 8-6 5-10 4-3-4-3-6z" stroke-dasharray="3 3"/></svg><small>تحديد</small></button></div><div id="styl"><span id="sw" class="row" style="flex-wrap:nowrap"></span><button id="stB" title="سماكة وشفافية القلم" aria-label="سماكة وشفافية القلم"><svg id="stV" viewBox="0 0 44 24" width="44" height="24"><path id="stP" d="M3 17C11 3 17 3 22 12S33 21 41 7" fill="none" stroke-linecap="round"/></svg></button></div></div>
+  <div id="view"><div id="pages"></div><div style="text-align:center;padding:6px 0 60px"><button id="addEnd">＋ صفحة جديدة</button><button id="addEndOpt" title="خيارات: اختيار الشكل والمكان">⋯</button></div></div><div id="dock"><div id="tools"><button data-t="pen" title="حبر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.500L6.500 11C6 7.500 7.500 5 9 3.500h6c1.500 1.500 3 4 2.500 7.500z"/><path d="M12 21.500V13.500"/><circle cx="12" cy="12" r="1.300" fill="currentColor"/><path d="M9 3.500h6"/></svg><small>حبر</small></button><button data-t="ball" style="display:none" title="جاف"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="9.800" y="1" width="4.400" height="12.500" rx="1.400"/><path d="M9.800 13.500L12 20.500l2.200-7"/><path d="M14.200 3.500v5"/><circle cx="12" cy="21" r=".6" fill="currentColor"/></g><path d="M11 22.500h10" stroke-width="1.200"/></svg><small>جاف</small></button><button data-t="fine" style="display:none" title="قلم رفيع"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="10.400" y="1" width="3.200" height="10" rx="1"/><path d="M10.400 6h3.200"/><path d="M10.700 11l1.300 8 1.300-8"/><path d="M12 19v2.500" stroke-width=".8"/></g><path d="M11 22.500h10" stroke-width=".7"/></svg><small>رفيع</small></button><button data-t="pencil" style="display:none" title="رصاص"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><path d="M9 5.500V2.500a1 1 0 011-1h4a1 1 0 011 1v3"/><rect x="9" y="5.500" width="6" height="10"/><path d="M12 5.500v10"/><path d="M9 15.500L12 22l3-6.500"/><path d="M10.700 19.200h2.600"/></g><path d="M11 22.500h10" stroke-width="1.400" stroke-dasharray="1.500 2"/></svg><small>رصاص</small></button><button data-t="marker" title="ماركر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="8.500" y="1" width="7" height="11" rx="1.500"/><path d="M8.500 5.500h7"/><path d="M9.500 12v3.500l1.500 4.500h2l1.500-4.500V12"/></g><path d="M11 22.500h10" stroke-width="3.200"/></svg><small>ماركر</small></button><button data-t="brush" style="display:none" title="فرشاة"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="11" y="1" width="2" height="9.500" rx="1"/><rect x="10" y="10.500" width="4" height="3.500" rx=".6"/><path d="M10 14c-.6 3 .2 5.200 2 8 1.800-2.800 2.600-5 2-8z" fill="currentColor" fill-opacity=".8"/></g></svg><small>فرشاة</small></button><button data-t="hand" title="خط يدي"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19c2.500-5 4-9 5.500-9s.500 5 2.500 5 2.500-8 4.500-8 1.500 7 3.500 7"/><path d="M3 21.500h18" stroke-width="1.200" opacity=".5"/></svg><small>خط يدي</small></button><button data-t="laser" style="display:none" title="قلم ليزر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c4-1 8-5 12-11" stroke-width="2.2" opacity=".45"/><circle cx="17" cy="7" r="3" fill="currentColor"/><path d="M17 1.5v2M17 10.5v2M11.500 7h2M20.500 7h2"/></svg><small>قلم ليزر</small></button><button data-t="hl" title="تظليل"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><rect x="7.500" y="1" width="9" height="9.500" rx="1.500"/><path d="M7.500 10.500h9l-1.800 5H9.300z"/><path d="M9.300 15.500l1.200 3h3l1.200-3"/></g><path d="M10 22.500h11" stroke-width="4" opacity=".35"/></svg><small>تظليل</small></button><button id="penB" title="أقلام أكثر"><b style="font-size:15px;white-space:nowrap;line-height:1">✒ ▾</b><small>أقلام</small></button><i></i><button data-t="eraser" title="ممحاة"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.500 16.500l9-9a2 2 0 013 0l4 4a2 2 0 010 3l-6 6H7.500z"/><path d="M9 11l6 6"/><path d="M13.500 21h7"/></svg><small>ممحاة</small></button><i></i><button data-t="line" style="display:none" title="خط"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19L19 5"/></svg></button><button data-t="rect" style="display:none" title="مستطيل"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="1"/></svg></button><button data-t="ell" style="display:none" title="دائرة / قطع ناقص"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="8.500" ry="6.500"/></svg></button><button id="shpB" title="أشكال أكثر"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4l6 10H2z"/><rect x="11" y="9" width="10" height="10" rx="1"/></svg><small>أشكال</small></button><button id="rulB" title="مسطرة: ارسم على حافتها لخط مستقيم تمامًا"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="1.500"/><path d="M6 8v3M10 8v4.500M14 8v3M18 8v4.500"/></svg><small>مسطرة</small></button><i></i><button data-t="text" title="نص"><b style="font-size:20px;font-family:serif">T</b><small>نص</small></button><button data-t="lasso" title="تحديد"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c0-4 4-7 8-6s7 4 5 8-6 5-10 4-3-4-3-6z" stroke-dasharray="3 3"/></svg><small>تحديد</small></button></div><div id="styl"><span id="sw" class="row" style="flex-wrap:nowrap"></span><button id="stB" title="سماكة وشفافية القلم" aria-label="سماكة وشفافية القلم"><svg id="stV" viewBox="0 0 44 24" width="44" height="24"><path id="stP" d="M3 17C11 3 17 3 22 12S33 21 41 7" fill="none" stroke-linecap="round"/></svg></button></div></div>
 </div>
 <div id="lsbar" class="panel" hidden>
   <div class="row" id="lsst" hidden><span id="lsSw" class="row" style="flex-wrap:nowrap;gap:4px"></span><span class="st" id="lsWl">سماكة</span><button id="lsWm" title="أنحف">−</button><button id="lsWp" title="أثخن">＋</button><span class="st">شفافية</span><input type="range" id="lsOp" min="15" max="100" value="100"></div>
@@ -721,11 +729,11 @@ let pinching=false,ls=null,gBind=null,gBindPg=null,S={books:[]},book=null,tool='
 const DOM=new Map(),IMG={},IT=new WeakMap(),TPL=['blank','lined','wide','grid','dots','cornell','corners'],TL={corners:'هوامش الزوايا',wide:'سطور عريضة',cornell:'كورنيل',blank:'فارغ',lined:'سطور',grid:'مربعات',dots:'نقاط'};
 const view=$('view'),pagesEl=$('pages');
 const SET=(()=>{try{return JSON.parse(localStorage.getItem('nbset')||'{}')}catch(e){return{}}})();
-const ER={mode:'ink',size:16,pix:true};const PT=['pen','ball','fine','pencil','marker','brush','hl','laser'],isLz=t=>t==='laser',hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
-let PENS=Array.isArray(SET.pens)?SET.pens.map(x=>x&&(x.t==='laserM'||x.t==='laserL')?Object.assign({},x,{t:'laser'}):x).filter(x=>x&&PT.includes(x.t)&&/^#[0-9a-f]{6}$/i.test(x.c||'')&&typeof x.id==='string').slice(0,12):[],lzC=/^#[0-9a-f]{6}$/i.test(SET.lzC||'')?SET.lzC:'#ff2a2a',curSlot=null,PCOL={};(()=>{const o=SET.pcol;if(o&&typeof o==='object')PT.forEach(t=>{const e=o[t];if(e&&/^#[0-9a-f]{6}$/i.test(e.c||'')&&+e.w>0)PCOL[t]={c:e.c,w:+e.w}})})();
+const ER={mode:'ink',size:16,pix:true};const PT=['pen','ball','fine','pencil','marker','brush','hand','hl','laser'],isLz=t=>t==='laser',hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+let PENS=Array.isArray(SET.pens)?SET.pens.map(x=>x&&(x.t==='laserM'||x.t==='laserL')?Object.assign({},x,{t:'laser'}):x).filter(x=>x&&PT.includes(x.t)&&/^#[0-9a-f]{6}$/i.test(x.c||'')&&typeof x.id==='string').slice(0,12):[],lzC=/^#[0-9a-f]{6}$/i.test(SET.lzC||'')?SET.lzC:'#ff2a2a',curSlot=null,PCOL={};(()=>{const o=SET.pcol;if(o&&typeof o==='object')PT.forEach(t=>{const e=o[t];if(e&&/^#[0-9a-f]{6}$/i.test(e.c||'')&&+e.w>0)PCOL[t]={c:e.c,w:+e.w}})})();if(!PCOL.hand)PCOL.hand={c:'#a43c38',w:3};
 let lsMode='items',lsAdd=false,CLIP=null,snapOn=SET.snap!==false;if(SET.er)Object.assign(ER,SET.er);
 let LZD=+SET.lzd>=.5&&+SET.lzd<=8?+SET.lzd:2.2,LZM=['fade','hold','hover'].includes(SET.lzm)?SET.lzm:'fade';let HLTT=+SET.hltt>=.5&&+SET.hltt<=8?+SET.hltt:2.2,HLT=false,HLS=SET.hls!==false,HLO=+SET.hlo>=.15&&+SET.hlo<=.9?+SET.hlo:.5;if(SET.color)color=SET.color;if(SET.width)width=SET.width;if(SET.po===false)po=false;$('po').checked=po;
-const saveSet=()=>{try{localStorage.setItem('nbset',JSON.stringify({po,color,width,er:ER,lsMode,snap:snapOn,pens:PENS,ord:ORD,lzC,pcol:PCOL,hlo:HLO,hls:HLS,lzd:LZD,lzm:LZM,hltt:HLTT}))}catch(e){}};
+const saveSet=()=>{try{localStorage.setItem('nbset',JSON.stringify({po,color,width,er:ER,lsMode,snap:snapOn,pens:PENS,ord:ORD,lzC,pcol:PCOL,hlo:HLO,hls:HLS,lzd:LZD,lzm:LZM,hltt:HLTT,hp:(typeof HIDP!=='undefined'&&HIDP)||[]}))}catch(e){}};
 let IDBH=null;idb.then(d=>{IDBH=d});
 const putNow=()=>{try{if(IDBH){IDBH.transaction('k','readwrite').objectStore('k').put(S,'lib');return}}catch(e){}dbq('put','lib',S)};
 const save=()=>{clearTimeout(st);st=setTimeout(()=>{st=0;putNow()},500)};
@@ -899,7 +907,7 @@ function strokePath(it,cw){
   for(let i=0;i<n;i++){const a=q[Math.max(0,i-1)],b=q[Math.min(n-1,i+1)];let tx=b[0]-a[0],ty=b[1]-a[1];const l=Math.hypot(tx,ty)||1;tx/=l;ty/=l;L.push([q[i][0]-ty*r[i],q[i][1]+tx*r[i]]);R.push([q[i][0]+ty*r[i],q[i][1]-tx*r[i]])}
   const side=A=>{for(let i=1;i<A.length-1;i++)P.quadraticCurveTo(A[i][0],A[i][1],(A[i][0]+A[i+1][0])/2,(A[i][1]+A[i+1][1])/2);P.lineTo(A[A.length-1][0],A[A.length-1][1])};
   P.moveTo(L[0][0],L[0][1]);side(L);const Rr=R.slice().reverse();P.lineTo(Rr[0][0],Rr[0][1]);side(Rr);P.closePath();
-  P.moveTo(q[0][0]+r[0],q[0][1]);P.arc(q[0][0],q[0][1],r[0],0,7);P.moveTo(q[n-1][0]+r[n-1],q[n-1][1]);P.arc(q[n-1][0],q[n-1][1],r[n-1],0,7);
+  {const pl=L.concat(Rr);let ar=0;for(let i=0;i<pl.length;i++){const a=pl[i],b=pl[(i+1)%pl.length];ar+=a[0]*b[1]-b[0]*a[1]}const cc=ar<0;P.moveTo(q[0][0]+r[0],q[0][1]);P.arc(q[0][0],q[0][1],r[0],0,7,cc);P.moveTo(q[n-1][0]+r[n-1],q[n-1][1]);P.arc(q[n-1][0],q[n-1][1],r[n-1],0,7,cc)}
   SC.set(it,{cw,n,P});return P}
 function segAt(g,it,cw,i){const p=it.p,n=p.length,A=i<2?p[0]:[(p[i-1][0]+p[i][0])/2,(p[i-1][1]+p[i][1])/2],E=i<n-1?[(p[i][0]+p[i+1][0])/2,(p[i][1]+p[i+1][1])/2]:p[n-1];
   g.strokeStyle=it.c;g.lineCap=g.lineJoin='round';g.lineWidth=it.w*cw/900*(it.n?1:.5+(p[i][2]||.5));g.beginPath();g.moveTo(A[0]*cw,A[1]*cw);g.quadraticCurveTo(p[i][0]*cw,p[i][1]*cw,E[0]*cw,E[1]*cw);g.stroke()}
@@ -1469,7 +1477,7 @@ function mkPage(pg,idx){
     if(tool==='eraser'||e.buttons===32){mkd({er:1,before:pg.items.slice()});erase(pg,p,drag);ring(p);return}
     if(SH[tool]){const it={k:SH[tool],c:color,w:width,p:[p,p]};if(tool==='geo')it.g=geoT;pg.items.push(it);mkd({it,sh:1,st:p,lp:p,ap:p});arm();live(it);return}
     const rl=rulLock(e);if(rl)rulPt(e,rl,p);
-    const PW={hl:4,pencil:.8,fine:.45,marker:2.2,brush:1.8},it={k:'s',c:color,w:width*(PW[tool]||1),p:[p]};if(tool==='hl'){it.a=.35;it.o=HLO}if(tool==='pencil')it.a=.7;if(tool==='marker')it.a=.85;if(tool==='ball'||tool==='fine'||tool==='marker')it.n=1;
+    const PW={hl:4,pencil:.8,fine:.45,marker:2.2,brush:1.8,hand:1.3},it={k:'s',c:color,w:width*(PW[tool]||1),p:[p]};if(tool==='hl'){it.a=.35;it.o=HLO}if(tool==='pencil')it.a=.7;if(tool==='marker')it.a=.85;if(tool==='ball'||tool==='fine'||tool==='marker'||tool==='hand')it.n=1;
     const tm=HLT&&tool==='hl';if(!tm)pg.items.push(it);mkd({it,ap:p,tmp:tm,rl});arm();live(it);
   }));
   cv.addEventListener('pointermove',safe(e=>{
@@ -1633,7 +1641,7 @@ function slotSync(){if(!curSlot){if(PT.includes(tool)&&!isLz(tool))PCOL[tool]={c
 function selTool(b){const prevT=tool,prevX=curSlot;tool=b.dataset.t;document.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));$('erbar').hidden=tool!=='eraser';$('lsm').hidden=tool!=='lasso';{const same=isLz(tool)&&prevT===tool&&prevX===(b.dataset.x||null);$('lzbar').hidden=!isLz(tool)||(same&&!$('lzbar').hidden)}if(tool!=='lasso'&&ls){setLs(null);unbindG()}
   $('stp').hidden=true;curSlot=b.dataset.x||null;if(curSlot){const s=PENS.find(x=>x.id===curSlot);if(s){if(isLz(s.t))lzC=s.c;else{color=s.c;width=s.w}saveSet()}}else if(PT.includes(tool)&&!isLz(tool)){let e=PCOL[tool];if(!e||(tool==='hl'&&(r=>(.299*r[0]+.587*r[1]+.114*r[2])/255<.4)(hx(e.c))))e=PCOL[tool]={c:tool==='hl'?'#ffe600':color,w:e?e.w:width};color=e.c;width=e.w;saveSet()}syncUI();
   if(tool==='text')gs('اضغط لكتابة نص، أو على نص موجود لتعديله');if(tool==='eraser')gs(ER.pix?'ممحاة نقطية: بتمحي الجزء اللي بتمرّ عليه':'ممحاة الخط كامل');if(tool==='lasso'){gs(LMT[lsMode]);lsInfo()}if(isLz(tool))gs('قلم ليزر: ما بينحفظ بالصفحة');
-  $('shpB').classList.remove('on');$('penB').classList.toggle('on',!b.dataset.x&&PENX.some(x=>x[0]===tool))}
+  $('shpB').classList.remove('on');$('penB').classList.toggle('on',!b.dataset.x&&(PENX.some(x=>x[0]===tool)||b.style.display==='none'))}
 document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>selTool(b));
 document.querySelector('[data-t=pen]').classList.add('on');
 const COL=['#111111','#d62828','#f77f00','#2a9d3f','#1d6fe0','#7b2cbf','#8d5524'];
@@ -1647,12 +1655,12 @@ document.querySelectorAll('#erM button').forEach(b=>b.onclick=()=>{ER.mode=b.dat
 $('erP').onclick=()=>{ER.pix=!ER.pix;erUI();saveSet()};$('erS').oninput=e=>{ER.size=+e.target.value;saveSet()};erUI();
 /* v26: style popover, contextual style row, dock-anchored panels, toast above dock */
 function DK(){const d=$('dock');return d?d.offsetHeight:128}
-const SIDE=matchMedia('(orientation:landscape) and (min-width:700px)');
+const SIDE=matchMedia('(orientation:landscape) and (min-width:99999px)');
 function dockSync(){const r=document.documentElement.style,d=$('dock');r.setProperty('--dk',DK()+'px');if(d)r.setProperty('--dkw',d.offsetWidth+'px');r.setProperty('--bh',$('bar').offsetHeight+'px')}
 if(window.ResizeObserver){const ro=new ResizeObserver(dockSync);ro.observe($('dock'));ro.observe($('bar'))}addEventListener('resize',dockSync);dockSync();
 $('ed').append($('pi'));
 function placeToast(e){const d=$('dock');if(!d||!d.offsetHeight||SIDE.matches){e.style.bottom='24px';return}let top=d.getBoundingClientRect().top;document.querySelectorAll('.panel').forEach(p=>{if(p.hidden||p.id==='calc'||p.id==='dlg'||p.id==='pgs')return;const r=p.getBoundingClientRect();if(r.height&&r.bottom>top-60&&r.top<top)top=r.top});e.style.bottom=(innerHeight-top+8)+'px'}
-function stPrev(){const nc=tool==='eraser'||tool==='lasso'||isLz(tool);$('sw').style.display=nc?'none':'';$('stB').style.display=nc?'none':'';$('styl').classList.toggle('nx',nc);if(nc){$('stp').hidden=true;dockSync();return}const PW={hl:4,pencil:.8,fine:.45,marker:2.2,brush:1.8},p=$('stP');p.setAttribute('stroke',color);p.setAttribute('stroke-width',Math.max(1,Math.min(16,width*(PW[tool]||1))));p.setAttribute('stroke-opacity',tool==='hl'?HLO:tool==='pencil'?.7:tool==='marker'?.85:1);dockSync()}
+function stPrev(){const nc=tool==='eraser'||tool==='lasso'||isLz(tool);$('sw').style.display=nc?'none':'';$('stB').style.display=nc?'none':'';$('styl').classList.toggle('nx',nc);if(nc){$('stp').hidden=true;dockSync();return}const PW={hl:4,pencil:.8,fine:.45,marker:2.2,brush:1.8,hand:1.3},p=$('stP');p.setAttribute('stroke',color);p.setAttribute('stroke-width',Math.max(1,Math.min(16,width*(PW[tool]||1))));p.setAttribute('stroke-opacity',tool==='hl'?HLO:tool==='pencil'?.7:tool==='marker'?.85:1);dockSync()}
 $('stB').onclick=()=>{$('stp').hidden=!$('stp').hidden};
 ['styl','stp'].forEach(i=>['click','input'].forEach(ev=>$(i).addEventListener(ev,()=>setTimeout(stPrev,0))));
 document.addEventListener('pointerdown',e=>{if(!$('stp').hidden&&!e.target.closest('#stp,#stB'))$('stp').hidden=true},true);
@@ -1959,11 +1967,11 @@ $('shpB').onclick=()=>{dlg.textContent='';dlg.hidden=false;dlg.append(mk('b','',
     b.onclick=()=>{dlg.hidden=true;if(k.startsWith('geo:')){tool='geo';geoT=k.slice(4)}else tool=k;if(ls){setLs(null);unbindG()}document.querySelectorAll('[data-t]').forEach(x=>x.classList.remove('on'));$('shpB').classList.add('on');$('penB').classList.remove('on');$('erbar').hidden=true;$('lsm').hidden=true;$('lzbar').hidden=true;syncUI();gs(l+': اسحب لرسمه، واثبت لتنظيمه')};gr.append(b)});
   const x=mk('button','danger','إلغاء');x.onclick=()=>dlg.hidden=true;dlg.append(gr,x)};
 const PENX=[['laser','🔴 قلم ليزر'],['ball','🖊 جاف'],['fine','✏ قلم رفيع'],['pencil','✏ رصاص'],['brush','🖌 فرشاة']];
-const PTN={pen:'حبر',ball:'جاف',fine:'قلم رفيع',pencil:'رصاص',marker:'ماركر',brush:'فرشاة',hl:'تظليل',laser:'قلم ليزر'};
+const PTN={pen:'حبر',ball:'جاف',fine:'قلم رفيع',pencil:'رصاص',marker:'ماركر',brush:'فرشاة',hand:'خط يدي',hl:'تظليل',laser:'قلم ليزر'};
 function renderPens(){document.querySelectorAll('#tools [data-x]').forEach(x=>x.remove());
   PENS.forEach(s=>{const base=document.querySelector('#tools [data-t="'+s.t+'"]:not([data-x])');if(!base)return;
     const b=document.createElement('button'),d=document.createElement('span');b.dataset.t=s.t;b.dataset.x=s.id;b.title=PTN[s.t];b.innerHTML=base.innerHTML;d.className='pd';d.style.background=s.c;b.append(d);
-    let tm=0,lp=false;b.addEventListener('pointerdown',()=>{lp=false;clearTimeout(tm);tm=setTimeout(()=>{lp=true;pick('قلم '+PTN[s.t],[['🗑 إزالة من الشريط',()=>delPen(s.id)]])},650)});
+    let tm=0,lp=false;b.addEventListener('pointerdown',()=>{lp=false;clearTimeout(tm);tm=setTimeout(()=>{lp=true;penEdit(true)},650)});
     ['pointerup','pointerleave','pointercancel'].forEach(t=>b.addEventListener(t,()=>clearTimeout(tm)));
     b.onclick=()=>{if(lp){lp=false;return}selTool(b)};
     if(curSlot===s.id&&tool===s.t)b.classList.add('on');$('tools').insertBefore(b,$('penB'))})}
@@ -2062,7 +2070,7 @@ const bkIn=document.createElement('input');bkIn.type='file';bkIn.accept='.json,a
 const bkMenu=()=>pick('النسخ الاحتياطي',[['⤓ احفظ نسخة احتياطية',exportAll],['⤒ استعادة من ملف (بيدمج وما بيحذف شي)',()=>bkIn.click()]]);
 $('bkB').onclick=bkMenu;$('bkNote').onclick=bkMenu;
 function bkNote(){const e=$('bkNote');if(!S.books.length){e.textContent='';return}let t=0;try{t=+localStorage.getItem('nbbk')||0}catch(x){}
-  const dd=t?Math.floor((Date.now()-t)/864e5):-1;e.textContent=dd<0?'⚠ ما في نسخة احتياطية بعد، اضغط هون لحفظ وحدة':dd===0?'✓ آخر نسخة احتياطية: اليوم':'آخر نسخة احتياطية: قبل '+dd+' يوم';e.style.color=dd<0||dd>14?'#c97a00':'var(--mute)'}
+  const dd=t?Math.floor((Date.now()-t)/864e5):-1;e.textContent=dd<0?'⚠ ما في نسخة احتياطية بعد، اضغط هون لحفظ وحدة':dd===0?'✓ آخر نسخة احتياطية: اليوم':'آخر نسخة احتياطية: قبل '+dd+' يوم';e.style.color=dd<0||dd>7?'#c97a00':'var(--mute)'}
 {const o=showLib;showLib=function(){o();bkNote()}}
 let pgDrag=null;
 var pgSelMode=false,pgSel=new Set(),pgSelBook=null;
@@ -2112,7 +2120,7 @@ function rulPt(e,edge,p){const dx=e.clientX-RUL.cx,dy=e.clientY-RUL.cy,c=Math.co
 addEventListener('resize',()=>{if(RUL.on)rulUpd()});
 /* v27: pens menu anchored to its button, with icons, pin/unpin */
 var ORD=(()=>{try{const o=JSON.parse(localStorage.getItem('nbset')||'{}').ord;return Array.isArray(o)?o:[]}catch(e){return[]}})();
-const PGT=['pen','ball','fine','pencil','marker','brush','laser','hl'];
+const PGT=['pen','ball','fine','pencil','marker','brush','hand','laser','hl'];
 function penGroup(){return[...document.querySelectorAll('#tools button')].filter(b=>(b.dataset.x||PGT.includes(b.dataset.t))&&b.style.display!=='none')}
 const pkey=b=>b.dataset.x?'x:'+b.dataset.x:'t:'+b.dataset.t;
 function applyOrder(){const g=penGroup(),ix=k=>{const i=ORD.indexOf(k);return i<0?1e6:i};g.map((b,i)=>[b,i]).sort((a,c)=>ix(pkey(a[0]))-ix(pkey(c[0]))||a[1]-c[1]).forEach(([b])=>$('tools').insertBefore(b,$('penB')))}
@@ -2132,9 +2140,157 @@ function pnmBuild(){const P0=$('pnm');P0.textContent='';const P=mk('div','sc');P
   P.append(mk('div','st','كل الأقلام (＋ يثبّت القلم بالشريط بلونك وسماكتك الحاليين)'));
   const g=mk('div','g');Object.keys(PTN).filter(t=>PT.includes(t)).forEach(t=>{const base=document.querySelector('#tools [data-t="'+t+'"]:not([data-x])');if(!base)return;
     const tl=tile(ico(base),PTN[t],!curSlot&&tool===t,()=>{P0.hidden=true;selTool(base)});
-    const q=mk('button','q','＋');q.title='ثبّت بالشريط';q.onclick=e=>{e.stopPropagation();addPen(t);pnmBuild()};tl.append(q);g.append(tl)});P.append(g)}
+    const q=mk('button','q','＋');q.title='ثبّت بالشريط';q.onclick=e=>{e.stopPropagation();if(HIDP.includes(t))unhideBase(t);else addPen(t);pnmBuild()};tl.append(q);g.append(tl)});P.append(g)}
 $('penB').onclick=()=>{const P=$('pnm');if(!P.hidden){P.hidden=true;return}$('stp').hidden=true;pnmBuild();P.hidden=false;const r=$('penB').getBoundingClientRect(),w=P.offsetWidth,l=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2));P.style.left=l+'px';P.style.right='auto';P.style.setProperty('--ax',(r.left+r.width/2-l)+'px')};
 document.addEventListener('pointerdown',e=>{if(!$('pnm').hidden&&!e.target.closest('#pnm,#penB'))$('pnm').hidden=true},true);
+
+/* pen bar edit mode: long-press a pen -> red minus badge (remove) + drag to reorder */
+var HIDP=Array.isArray(SET.hp)?SET.hp.filter(t=>typeof t==='string'&&PGT.includes(t)):[];
+var PE={on:false,tm:0,sx:0,sy:0,id:-1,btn:null,drag:null};
+const baseOf=t=>document.querySelector('#tools [data-t="'+t+'"]:not([data-x])');
+HIDP.forEach(t=>{const b=baseOf(t);if(b)b.style.display='none'});
+setTimeout(()=>{try{if(HIDP.includes(tool)&&!curSlot){const nb=penGroup()[0];if(nb)selTool(nb)}}catch(e){}},0);
+function unhideBase(t){HIDP=HIDP.filter(x=>x!==t);const b=baseOf(t);if(b)b.style.display='';saveSet();applyOrder();gs('رجع القلم للشريط')}
+const penBtn=el=>{const b=el&&el.closest&&el.closest('#tools button');return b&&penGroup().includes(b)?b:null};
+function penEdit(on,quiet){
+  if(on&&PE.on&&!quiet)return;
+  PE.on=on;const T=$('tools');T.classList.toggle('pe',on);
+  T.querySelectorAll('.pdx').forEach(x=>x.remove());
+  T.querySelectorAll('.pej').forEach(b=>b.classList.remove('pej'));
+  if(on){penGroup().forEach(b=>{const x=document.createElement('span');x.className='pdx';x.textContent='−';b.append(x);b.classList.add('pej')});if(!quiet)gs('اسحب القلم لتغيير مكانه · اضغط − لإزالته · اضغط بأي مكان للإنهاء')}
+  else T.querySelectorAll('.pdg').forEach(b=>{b.classList.remove('pdg');b.style.transform=''})
+}
+function removePen(b){
+  if(penGroup().length<=1){gs('لازم يضل قلم واحد على الأقل بالشريط');return}
+  if(b.dataset.x){delPen(b.dataset.x);return}
+  const t=b.dataset.t;if(!HIDP.includes(t))HIDP.push(t);b.style.display='none';
+  if(tool===t&&!curSlot){const nb=penGroup()[0];if(nb)selTool(nb)}
+  saveSet();penEdit(true,true);gs('انشال القلم من الشريط (بترجّعه من قائمة الأقلام)')
+}
+{const o=renderPens;renderPens=function(){o();if(PE.on)penEdit(true,true)}}
+function dragMove(x){
+  const d=PE.drag,b=d.b,T=$('tools');b.style.transform='none';
+  const rtl=getComputedStyle(T).direction==='rtl',br=b.getBoundingClientRect(),bc=br.left+br.width/2;
+  for(const o of penGroup()){if(o===b)continue;const r=o.getBoundingClientRect();
+    if(x>r.left&&x<r.right){const mid=(r.left+r.right)/2,oc=mid;
+      if(oc<bc&&x<mid)T.insertBefore(b,rtl?o.nextSibling:o);
+      else if(oc>bc&&x>mid)T.insertBefore(b,rtl?o:o.nextSibling);
+      break}}
+  const nl=b.getBoundingClientRect().left;b.style.transform='translateX('+(x-d.ox-nl)+'px)';
+  const tr=T.getBoundingClientRect();if(x<tr.left+36)T.scrollLeft-=10;else if(x>tr.right-36)T.scrollLeft+=10
+}
+$('tools').addEventListener('pointerdown',e=>{
+  if(e.target.closest('.pdx'))return;
+  const b=penBtn(e.target);if(!b)return;
+  PE.btn=b;PE.sx=e.clientX;PE.sy=e.clientY;PE.id=e.pointerId;
+  const begin=()=>{PE.drag={b,ox:PE.sx-b.getBoundingClientRect().left,moved:false};try{b.setPointerCapture(PE.id)}catch(_){}};
+  if(PE.on){begin()}
+  else{clearTimeout(PE.tm);PE.tm=setTimeout(()=>{if(PE.btn===b){penEdit(true);begin()}},520)}
+},true);
+document.addEventListener('pointermove',e=>{
+  if(!PE.btn||e.pointerId!==PE.id)return;
+  if(!PE.on){if(Math.hypot(e.clientX-PE.sx,e.clientY-PE.sy)>10){clearTimeout(PE.tm);PE.btn=null}return}
+  const d=PE.drag;if(!d)return;
+  if(!d.moved){if(Math.hypot(e.clientX-PE.sx,e.clientY-PE.sy)<6)return;d.moved=true;d.b.classList.add('pdg')}
+  dragMove(e.clientX)
+},true);
+['pointerup','pointercancel'].forEach(t=>document.addEventListener(t,e=>{
+  if(e.pointerId!==PE.id)return;clearTimeout(PE.tm);
+  const d=PE.drag;if(d){d.b.classList.remove('pdg');d.b.style.transform='';if(d.moved){ORD=penGroup().map(pkey);saveSet()}}
+  PE.drag=null;PE.btn=null
+},true));
+$('tools').addEventListener('touchmove',e=>{if(PE.on&&PE.drag&&e.cancelable)e.preventDefault()},{passive:false});
+$('tools').addEventListener('contextmenu',e=>{if(penBtn(e.target))e.preventDefault()});
+$('tools').addEventListener('click',e=>{
+  if(!PE.on)return;
+  const x=e.target.closest('.pdx');e.stopPropagation();e.preventDefault();
+  if(x)removePen(x.parentElement)
+},true);
+document.addEventListener('pointerdown',e=>{
+  if(!PE.on)return;
+  if(e.target.closest('.pdx')||penBtn(e.target))return;
+  penEdit(false)
+},true);
+
+/* tap outside a popup menu (#dlg) closes it; text-entry dialogs with typed text stay open */
+(()=>{const d=$('dlg');if(!d)return;let dirty=false,eatUntil=0;
+  const isTxt=el=>el&&el.matches&&el.matches('textarea,[contenteditable="true"],input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file])');
+  d.addEventListener('input',e=>{if(isTxt(e.target))dirty=true},true);
+  new MutationObserver(()=>{dirty=false}).observe(d,{childList:true,attributes:true,attributeFilter:['hidden']});
+  document.addEventListener('pointerdown',e=>{
+    if(d.hidden||e.target.closest('#dlg'))return;
+    if(dirty)return;
+    e.preventDefault();e.stopPropagation();d.hidden=true;eatUntil=Date.now()+450
+  },true);
+  document.addEventListener('click',e=>{if(Date.now()<eatUntil){e.preventDefault();e.stopPropagation();eatUntil=0}},true)
+})();
+
+/* (1) weekly backup reminder */
+(()=>{const DAY=864e5;let shown=false;
+  const g=k=>{try{return +localStorage.getItem(k)||0}catch(e){return 0}};
+  function nag(){
+    if(shown||!S.books||!S.books.length||$('lib').hidden)return;
+    const t=g('nbbk'),dd=t?Math.floor((Date.now()-t)/DAY):999;
+    if(dd<7||Date.now()<g('nbbkSnz'))return;
+    shown=true;
+    const bx=mk('div','panel');bx.id='bkNag';bx.style.cssText='left:50%;transform:translateX(-50%);width:min(420px,94vw);z-index:55;display:flex;flex-direction:column;gap:8px';
+    const m=mk('div','',dd===999?'💾 دفاترك ما إلها نسخة احتياطية بعد':'💾 مرّ '+dd+' يوم على آخر نسخة احتياطية لدفاترك');m.style.fontWeight='700';
+    const r=mk('div','row'),ok=mk('button','primary','احفظ نسخة الآن'),lt=mk('button','','لاحقاً');
+    ok.onclick=()=>{bx.remove();exportAll()};
+    lt.onclick=()=>{try{localStorage.setItem('nbbkSnz',String(Date.now()+DAY))}catch(e){}bx.remove()};
+    r.append(ok,lt);bx.append(m,r);document.body.append(bx)
+  }
+  {const o=showLib;showLib=function(){o();setTimeout(nag,1500)}}
+  setTimeout(nag,2500)
+})();
+/* (4) new-version notice: compares the app-version stamp of the live page with the running one */
+(()=>{if(location.protocol==='file:'||!window.fetch)return;
+  const cur=(document.querySelector('meta[name=app-version]')||{}).content;if(!cur)return;
+  let last=0,shown=false;
+  function show(){shown=true;
+    const bx=mk('div','panel');bx.id='updBar';bx.style.cssText='top:calc(10px + env(safe-area-inset-top,0px));bottom:auto;left:50%;transform:translateX(-50%);width:min(420px,94vw);z-index:55;display:flex;flex-direction:column;gap:8px';
+    const m=mk('div','','🔄 في نسخة جديدة من التطبيق');m.style.fontWeight='700';
+    const r=mk('div','row'),ok=mk('button','primary','تحديث الآن'),lt=mk('button','','لاحقاً');
+    ok.onclick=()=>{try{flushSave()}catch(e){}setTimeout(()=>location.reload(),150)};
+    lt.onclick=()=>bx.remove();
+    r.append(ok,lt);bx.append(m,r);document.body.append(bx)
+  }
+  async function chk(){
+    if(shown||!navigator.onLine||Date.now()-last<120000)return;last=Date.now();
+    try{const r=await fetch(location.pathname,{cache:'no-store'});if(!r.ok)return;const t=await r.text();
+      const m=t.match(/name=["']app-version["']\s+content=["']([^"']+)["']/);if(m&&m[1]!==cur)show()}catch(e){}
+  }
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});
+  setInterval(chk,600000);setTimeout(chk,4000)
+})();
+/* (5) editable colour palette: long-press a swatch to change/delete it, + adds the current colour */
+(()=>{const sw=$('sw'),cpIn=sw.querySelector('input[type=color]'),HEX=/^#[0-9a-f]{6}$/i;
+  const normals=()=>[...sw.querySelectorAll('button.sw[data-g="n"]:not(.add)')];
+  const savePal=()=>{try{localStorage.setItem('nbpalc',JSON.stringify(normals().map(b=>b.dataset.c)))}catch(e){}};
+  const addBtn=mk('button','sw add','+');addBtn.dataset.g='n';addBtn.title='أضف اللون الحالي للوحة';
+  addBtn.style.cssText='background:transparent;border:2px dashed var(--line);font-size:18px;line-height:1;color:var(--mute)';
+  const mkN=c=>{const b=mk('button','sw');b.style.background=c;b.dataset.c=c;b.dataset.g='n';
+    b.onclick=()=>{color=b.dataset.c;slotSync();saveSet();syncUI()};sw.insertBefore(b,addBtn);return b};
+  {const first=normals();const last=first[first.length-1];sw.insertBefore(addBtn,last?last.nextSibling:cpIn)}
+  let st=null;try{st=JSON.parse(localStorage.getItem('nbpalc'))}catch(e){}
+  if(Array.isArray(st)&&st.length>=3&&st.length<=14&&st.every(c=>typeof c==='string'&&HEX.test(c))){normals().forEach(b=>b.remove());st.forEach(mkN)}
+  addBtn.onclick=()=>{
+    if(normals().length>=14){gs('اللوحة ممتلئة (١٤ لون)');return}
+    if(normals().some(b=>b.dataset.c.toLowerCase()===color.toLowerCase())){gs('هاللون موجود باللوحة');return}
+    mkN(color);savePal();syncUI();gs('انضاف اللون للوحة')};
+  const palIn=document.createElement('input');palIn.type='color';palIn.style.cssText='position:fixed;opacity:.01;pointer-events:none;width:28px;height:28px;z-index:-1';document.body.append(palIn);
+  palIn.oninput=()=>{const b=palIn._t;if(!b)return;const was=b.dataset.c===color;b.dataset.c=palIn.value;b.style.background=palIn.value;if(was){color=palIn.value;slotSync();saveSet()}savePal();syncUI()};
+  function swMenu(b){const c0=b.dataset.c;
+    pick('لون اللوحة',[['● غيّر هاللون',()=>{const r=b.getBoundingClientRect();palIn.style.left=r.left+'px';palIn.style.top=r.top+'px';palIn.value=c0;palIn._t=b;palIn.click()}],['🗑 احذفه من اللوحة',()=>{if(normals().length<=3){gs('لازم يضل ٣ ألوان على الأقل');return}b.remove();savePal();syncUI()}]]);
+    const f=dlg.querySelector('button');if(f)f.style.color=c0}
+  let tm=0,lp=false,sx=0,sy=0;
+  sw.addEventListener('pointerdown',e=>{const b=e.target.closest('button.sw[data-g="n"]:not(.add)');if(!b)return;lp=false;sx=e.clientX;sy=e.clientY;clearTimeout(tm);tm=setTimeout(()=>{lp=true;swMenu(b)},550)},true);
+  sw.addEventListener('pointermove',e=>{if(tm&&Math.hypot(e.clientX-sx,e.clientY-sy)>8)clearTimeout(tm)},true);
+  ['pointerup','pointercancel','pointerleave'].forEach(t=>sw.addEventListener(t,()=>clearTimeout(tm),true));
+  sw.addEventListener('click',e=>{if(lp){lp=false;e.stopPropagation();e.preventDefault()}},true);
+  sw.addEventListener('contextmenu',e=>{if(e.target.closest('button.sw'))e.preventDefault()});
+  syncUI()
+})();
 const mvPg=d=>{const i=curPg,j=i+d,a=book.pages;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];renderBook();curPg=j;upd();setTimeout(()=>pagesEl.children[j].scrollIntoView({block:'start'}),50);save()};
 $('mvU').onclick=()=>mvPg(-1);$('mvD').onclick=()=>mvPg(1);
 $('bmB').onclick=()=>{const p=book.pages[curPg];p.bm=!p.bm;upd();save();gs(p.bm?'تم تعليم الصفحة '+(curPg+1):'انشالت الإشارة')};
