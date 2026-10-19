@@ -3537,11 +3537,11 @@ async function pdfOutline(pdf,n){const out=[];try{const ol=await pdf.getOutline(
 async function importPdf(f,tg){
   if(!window.pdfjsLib){gs('مكتبة PDF ما تحمّلت');return}
   try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    const pdf=await pdfjsLib.getDocument({verbosity:0,data:await f.arrayBuffer()}).promise,n=Math.min(pdf.numPages,80),pgs=[];let nTx=0;
+    const pdf=await pdfjsLib.getDocument({verbosity:0,data:await f.arrayBuffer()}).promise,n=(pdf.numPages>80&&!confirm('الملف فيه '+pdf.numPages+' صفحة.\nموافق = استيراد كل الصفحات (أبطأ وبياخد مساحة)\nإلغاء = أول 80 صفحة بس'))?80:pdf.numPages,pgs=[];let nTx=0;
     for(let p=1;p<=n;p++){gs('عم أستورد '+p+' / '+n);const pg=await pdf.getPage(p),vp1=pg.getViewport({scale:1}),sc=Math.max(1.6,Math.min(4,2200/vp1.width,Math.sqrt(9e6/(vp1.width*vp1.height)))),vp=pg.getViewport({scale:sc}),cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;
       await pg.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;const key=uid()+uid();await dbq('put',key,cv.toDataURL('image/jpeg',.88));
       const tx=[];try{const tc=await pg.getTextContent(),v1=pg.getViewport({scale:1});tc.items.forEach(t=>{if(!t.str||!t.str.trim())return;const m=pdfjsLib.Util.transform(v1.transform,t.transform),fh=Math.hypot(m[2],m[3]);if(!(fh>0)||Math.abs(m[1])>Math.abs(m[0])*.3)return;tx.push([t.str,+(m[4]/v1.width).toFixed(4),+((m[5]-fh*.86)/v1.width).toFixed(4),+(t.width/v1.width).toFixed(4),+(fh/v1.width).toFixed(4),t.dir==='rtl'?1:0])})}catch(e){}
-      if(tx.length)nTx++;pgs.push(newPage(Object.assign({tpl:'blank',bg:key,ar:vp.height/vp.width},tx.length?{tx}:{})))}
+      try{cv.width=cv.height=0;pg.cleanup()}catch(e){}if(p%10===0)await new Promise(r=>setTimeout(r,0));if(tx.length)nTx++;pgs.push(newPage(Object.assign({tpl:'blank',bg:key,ar:vp.height/vp.width},tx.length?{tx}:{})))}
     /* عناوين الـ PDF بتصير عناوين صفحات بفهرس الدفتر (الفرعية بتنزاح) */
     let nt=0;{const ent=await pdfOutline(pdf,n),best={};ent.forEach(e=>{const c=best[e.p];if(!c||e.l<c.l)best[e.p]=e});Object.keys(best).forEach(k=>{const e=best[k],pg=pgs[k];if(pg){pg.ti=e.t.slice(0,80);if(e.l>0)pg.tl=2;nt++}})}
     if(tg==='new'){const b={id:uid(),title:f.name.replace(/[.]pdf$/i,''),ts:Date.now(),folderId:cwd,pages:pgs};S.books.push(b);save();open(b)}
