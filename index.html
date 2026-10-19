@@ -3,7 +3,7 @@
 <head><script>if(/[?&]pane=1(&|$)/.test(location.search)&&window.parent!==window){window.__PANE=1;document.documentElement.classList.add('pane');window.__PANE_OTHER=function(){try{return window.parent.__APP.cur()}catch(e){return null}}}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f3f6fb">
-<meta name="app-version" content="11">
+<meta name="app-version" content="12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -24,6 +24,7 @@ html.pane #splB,html.pane #splB2,html.pane #bkNag,html.pane #stNote,html.pane #u
 #tools.fl.fr,#styl.fl.fr{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
 </style>
 <style id="geocss">#geo{padding-top:4px}#geoTools,#geoActs{gap:5px;margin:6px 0 0}#geoTools button,#geoActs button{padding:6px 8px;font-size:13px}#geoSt{min-height:20px;margin:6px 2px}#geoBoard{width:100%;height:320px;direction:ltr;touch-action:none;background:#fff;border-radius:8px;box-shadow:0 0 0 1px var(--line);overflow:hidden;position:relative}#geoBoard svg{touch-action:none;display:block}#calc.mini #geo{display:none!important}</style>
+<style id="foldskin">.fold.fsk{background:transparent!important;padding:2px 0!important;display:flex;justify-content:center}.fsk svg{width:100%;height:84px;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}.fsk svg *{vector-effect:none}.grid.list .bk .fold.fsk svg{height:56px}.bk .mn{z-index:5}</style>
 <style id="fitfix">.panel,#dlg,#pmenu{max-width:min(96vw,calc(100% - 12px))!important}#pmenu{max-height:calc(100% - 16px);overflow:auto}</style>
 <style id="appcss">
 :root{--bg:#f3f6fb;--card:#ffffff;--elev:#eaf0f8;--ink:#1c2433;--mute:#66738a;--line:#d9e1ee;--accent:#3b82f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -261,6 +262,60 @@ html #calc{top:calc(var(--bh,150px) + 10px);max-height:calc(100% - var(--bh,150p
 @supports (justify-content:safe center){#ed #pages.two{justify-content:safe center}}
 #zbadge{position:fixed;z-index:25;pointer-events:none;direction:ltr;font:700 13px/1 ui-monospace,Menlo,monospace;color:#fff;background:rgba(20,22,28,.72);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;opacity:.55;transition:opacity .25s;-webkit-user-select:none;user-select:none}
 #zbadge.on{opacity:1}
+</style>
+<style id="simplify">
+/* تبسيط الواجهة: الأساسي ظاهر، والثانوي بالقوائم */
+#splB2{display:none!important}
+#top{padding:8px 10px;gap:8px;box-shadow:none}
+#top h1{font-size:18px;white-space:nowrap}
+#q{flex:1 1 120px;height:40px;border:1px solid var(--line);border-radius:12px;background:var(--elev);padding:0 12px;font-size:15px;color:var(--ink)}
+#crumb,#tagbar,#vbar{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;margin-top:8px!important}
+#crumb::-webkit-scrollbar,#tagbar::-webkit-scrollbar,#vbar::-webkit-scrollbar{display:none}
+#crumb>*,#tagbar>*,#vbar>*{flex:0 0 auto}
+#crumb:empty,#tagbar:empty,#vbar:empty,#bkNote:empty{display:none}
+.grid{gap:14px}
+.bk{border-radius:16px;padding:8px;box-shadow:none}
+.bk b{font-size:14px;font-weight:600}
+#bar>button.sm-h{position:absolute!important;left:50%;top:50%;width:1px!important;min-width:0!important;height:1px!important;padding:0!important;opacity:0;pointer-events:none;overflow:hidden}
+#title{font-size:16px;border-bottom:0!important}
+#pi{color:var(--mute);font-size:12px;white-space:nowrap}
+html:not(.sm-all) #tools button:not([data-t=pen]):not([data-t=ball]):not([data-t=fine]):not([data-t=pencil]):not([data-t=marker]):not([data-t=brush]):not([data-t=hand]):not([data-t=laser]):not([data-t=hl]):not([data-t=eraser]):not([data-t=text]):not([data-t=lasso]):not(#shpB){display:none!important}
+#tools button[data-t=laser]{display:inline-flex!important}
+.smAdd{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:150px;border:2px dashed var(--line);border-radius:16px;color:var(--accent);cursor:pointer}
+.smAdd b{font-size:14px;font-weight:600}
+.smAdd:active{background:var(--elev)}
+html:not(.sm-all) #tools i{display:none}
+#dock{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:4px;row-gap:2px}
+#dock #tools{grid-column:1;grid-row:1}
+#dock #smTg{grid-column:2;grid-row:1;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1}
+#dock #styl{grid-column:1/-1;grid-row:2}
+#smTg svg{width:23px;height:23px}
+#smTg small{font-size:9px;font-weight:600;opacity:.7}
+</style>
+<style id="polish">
+/* ===== polish v1: تحسينات خفيفة فوق الستايل الحالي (بدون لمس المنطق) ===== */
+/* خط: ترتيب يفضّل خطوط النظام العربية الحديثة */
+body,button,input,textarea,select{font-family:system-ui,-apple-system,"SF Arabic","Segoe UI","Noto Sans Arabic","Noto Naskh Arabic",Tahoma,sans-serif}
+/* أهداف لمس أكبر (الحد الأدنى المريح ~ 40-44px) */
+#tools button{min-width:46px;padding:0 6px}
+#tools button small,#smTg small{font-size:11px;opacity:.85}
+#dock button.sw,.sw{width:32px;min-width:32px;height:32px}
+#lzbar .lzs{width:30px!important;height:30px!important;min-width:30px!important}
+.lzs{width:32px;height:32px;min-width:32px}
+.tb .tx{width:30px;height:30px;font-size:18px}
+#pnm .q{width:30px;height:30px;font-size:16px}
+#pnm .mv button{height:30px;padding:0 10px;font-size:12px}
+#bar button{min-width:42px;min-height:42px}
+/* خلفية التكبير: سلايت غامق مايل لون الثيم بدل الأخضر المزرق الثابت */
+#ed #view{background:color-mix(in srgb,var(--accent) 22%,#1f2733)}
+/* تركيز واضح للوحة المفاتيح */
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.bk:focus-visible,.tb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* أيقونة المجلد تعبّي عرض الكرت كامل بدل ما تضل صغيرة بنص فراغ */
+.bk>.fold.fsk{padding:0!important;display:block}
+.fold.fsk svg{width:100%;height:auto;aspect-ratio:100/84;filter:drop-shadow(0 3px 5px rgba(0,0,0,.22))}
+.grid.list .bk .fold.fsk svg{width:100%;height:auto}
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -2602,6 +2657,33 @@ function mergeDlg(b){
         const t=[...new Set([...(b.tags||[]),...(c.tags||[])])];if(t.length)b.tags=t;
         S.books=S.books.filter(z=>z!==c);b.ts=b.mod=Date.now();
         save();flushSave();showLib();gs('تم الدمج ✓ ('+b.pages.length+' صفحة)')}]])]))}
+const FBK='M4 12Q4 5 11 5H37Q42 5 45 9L49 13H89Q96 13 96 20V72Q96 80 88 80H12Q4 80 4 72Z',FFR='M4 25Q4 19 10 19H90Q96 19 96 25V72Q96 80 88 80H12Q4 80 4 72Z';
+const FB=(b,f,mid)=>'<path d="'+FBK+'" style="fill:'+b+'"/>'+(mid||'')+'<path d="'+FFR+'" style="fill:'+f+'"/><path d="M4 25Q4 19 10 19H90Q96 19 96 25V40H4Z" fill="#fff" opacity=".13"/>';
+const FDK='color-mix(in srgb,var(--bc) 62%,#000)',FCL='var(--bc)';
+const FSY=x=>FB(FDK,FCL)+x;
+const eyeW='<circle cx="30" cy="50" r="7.5" fill="#ffd23f"/><circle cx="70" cy="50" r="7.5" fill="#ffd23f"/><circle cx="30" cy="50" r="4.2" fill="#1b1b1b"/><circle cx="70" cy="50" r="4.2" fill="#1b1b1b"/><circle cx="31.5" cy="48.5" r="1.3" fill="#fff"/><circle cx="71.5" cy="48.5" r="1.3" fill="#fff"/>';
+const FSK={
+ plain:['مجلد عادي',FB(FDK,FCL)],
+ cat:['قطة',FB('#cfcfd6','#ffffff','<path d="M5 22L11 2L30 19Z M95 22L89 2L70 19Z" fill="#fff"/><path d="M10 18L12 8L20 17Z M90 18L88 8L80 17Z" fill="#cfcfd6"/>')+eyeW+'<ellipse cx="19" cy="63" rx="7" ry="3.5" fill="#ffb3a7"/><ellipse cx="81" cy="63" rx="7" ry="3.5" fill="#ffb3a7"/><path d="M46 59H54L50 64Z" fill="#ff8a5c"/><path d="M50 64V67Q46 70 43 67M50 67Q54 70 57 67" stroke="#c9a" stroke-width="1.4" fill="none" stroke-linecap="round"/>'],
+ blackcat:['قطة سوداء',FB('#0f0f11','#38383d','<path d="M5 22L11 2L30 19Z M95 22L89 2L70 19Z" fill="#26262a"/><path d="M10 18L12 8L20 17Z M90 18L88 8L80 17Z" fill="#d8d8de"/>')+'<circle cx="30" cy="50" r="7" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="70" cy="50" r="7" fill="none" stroke="#fff" stroke-width="2.2"/><ellipse cx="19" cy="63" rx="7" ry="3.5" fill="#ff8f7a"/><ellipse cx="81" cy="63" rx="7" ry="3.5" fill="#ff8f7a"/><path d="M46 59H54L50 64Z" fill="#ff8a5c"/>'],
+ panda:['باندا',FB('#c4c4ca','#ffffff','<circle cx="14" cy="20" r="11.5" fill="#3a3a3e"/><circle cx="86" cy="20" r="11.5" fill="#3a3a3e"/>')+'<ellipse cx="30" cy="51" rx="9.5" ry="12" transform="rotate(25 30 51)" fill="#3a3a3e"/><ellipse cx="70" cy="51" rx="9.5" ry="12" transform="rotate(-25 70 51)" fill="#3a3a3e"/><circle cx="31" cy="49" r="3.6" fill="#fff"/><circle cx="69" cy="49" r="3.6" fill="#fff"/><circle cx="31.5" cy="49.5" r="1.8" fill="#1b1b1b"/><circle cx="68.5" cy="49.5" r="1.8" fill="#1b1b1b"/><ellipse cx="50" cy="61" rx="4.5" ry="3.2" fill="#3a3a3e"/><path d="M50 64V67Q46 70 43 68M50 67Q54 70 57 68" stroke="#3a3a3e" stroke-width="1.5" fill="none" stroke-linecap="round"/>'],
+ redpanda:['الباندا الحمراء',FB('#7a3b10','#ff8a30','<path d="M5 24L10 3L32 20Z M95 24L90 3L68 20Z" fill="#b4561a"/><path d="M10 20L12 8L25 19Z M90 20L88 8L75 19Z" fill="#fff"/>')+'<ellipse cx="29" cy="64" rx="15" ry="10.5" transform="rotate(-12 29 64)" fill="#fff"/><ellipse cx="71" cy="64" rx="15" ry="10.5" transform="rotate(12 71 64)" fill="#fff"/><ellipse cx="50" cy="64" rx="11" ry="9" fill="#fff"/><path d="M36 50Q33 62 40 66M64 50Q67 62 60 66" stroke="#b4561a" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="37" cy="47" r="3.6" fill="#3b1c07"/><circle cx="63" cy="47" r="3.6" fill="#3b1c07"/><ellipse cx="41" cy="35" rx="3" ry="2" fill="#fff"/><ellipse cx="59" cy="35" rx="3" ry="2" fill="#fff"/><path d="M45 61H55L50 67Z" fill="#2a1206"/>'],
+ bear:['دب',FB('#5e3517','#a8693a','<circle cx="14" cy="20" r="11.5" fill="#8a5129"/><circle cx="86" cy="20" r="11.5" fill="#8a5129"/><circle cx="14" cy="21" r="5.5" fill="#e2b078"/><circle cx="86" cy="21" r="5.5" fill="#e2b078"/>')+'<ellipse cx="50" cy="62" rx="17" ry="12.5" fill="#e8c39a"/><circle cx="32" cy="47" r="4.2" fill="#1b1b1b"/><circle cx="68" cy="47" r="4.2" fill="#1b1b1b"/><ellipse cx="50" cy="57" rx="5.5" ry="3.8" fill="#1b1b1b"/><path d="M50 61V66Q45 70 41 67M50 66Q55 70 59 67" stroke="#1b1b1b" stroke-width="1.8" fill="none" stroke-linecap="round"/>'],
+ tri:['مثلث',FSY('<path d="M50 33L69 69H31Z" fill="#fff" opacity=".92" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>')],
+ circ:['دائرة',FSY('<circle cx="50" cy="52" r="19" fill="#fff" opacity=".92"/>')],
+ integ:['تكامل ∫',FSY('<path d="M57 31C53 25 46 28 46 39V64C46 75 40 78 36 72" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round"/><circle cx="59" cy="32" r="3.6" fill="#fff"/><circle cx="35" cy="72" r="3.6" fill="#fff"/>')],
+ sigma:['مجموع ∑',FSY('<path d="M65 34H36L53 52L36 70H65" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')],
+ pi:['باي π',FSY('<path d="M32 38H68M42 38V68M58 38V65Q58 70 64 69" stroke="#fff" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>')],
+ star:['نجمة',FSY('<path d="M50 32L55.5 46H70L58.5 55L63 69L50 60.5L37 69L41.5 55L30 46H44.5Z" fill="#fff" opacity=".92" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>')],
+ heart:['قلب',FSY('<path d="M50 70C34 59 30 50 35 43C40 38 47 40 50 46C53 40 60 38 65 43C70 50 66 59 50 70Z" fill="#fff" opacity=".92"/>')]};
+const fsvg=id=>'<svg viewBox="0 0 100 84" aria-hidden="true">'+FSK[id][1]+'</svg>';
+function foldIc(f){const d=mk('div','fold fsk');d.innerHTML=fsvg(f.ic&&FSK[f.ic]?f.ic:'plain');return d}
+function icDlg(f){dlg.textContent='';dlg.hidden=false;
+  const g=mk('div');g.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:62vh;overflow:auto';g.style.setProperty('--bc',colOf(f));
+  const mkb=(id,lb)=>{const b=mk('button','');b.style.cssText='display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;font-size:12px';const v=mk('div','fsk');v.style.cssText='width:100%;height:56px;display:flex;align-items:center;justify-content:center';v.innerHTML=fsvg(id||'plain');v.firstChild.style.height='56px';b.append(v,mk('span','',lb));if((f.ic||'')===(id||''))b.classList.add('on');b.onclick=()=>{if(id)f.ic=id;else delete f.ic;save();showLib()};g.append(b)};
+  mkb('','مجلد عادي');Object.keys(FSK).forEach(k=>mkb(k,FSK[k][0]));
+  const x=mk('button','','إلغاء');x.onclick=()=>dlg.hidden=true;
+  dlg.append(mk('b','','تلبيس المجلد'),g,x)}
 function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('tsm').hidden=true;$('lzbar').hidden=true;
   book=null;$('ed').hidden=true;$('lib').hidden=false;$('calc').hidden=true;ls=null;$('lsbar').hidden=true;dlg.hidden=true;try{tabsRender()}catch(e){}S.folders=S.folders||[];
   if(!S.folders.some(f=>f.id===cwd))cwd=null;
@@ -2609,11 +2691,11 @@ function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('tsm').hidden=t
   const qs=$('q').value.trim().toLowerCase(),flt=!!(qs||ftag),g=$('grid'),bc=$('crumb'),tb=$('tagbar'),rr=$('rrow'),sf=x=>(x.parent||null)===cwd,
    sb=x=>qs?((x.title||'').toLowerCase().includes(qs)||(x.tags||[]).some(t=>t.toLowerCase().includes(qs))):ftag?(x.tags||[]).includes(ftag):bfid(x)===cwd;
   g.textContent='';bc.textContent='';tb.textContent='';rr.textContent='';
-  S.ui=S.ui||{};window.__calcFx&&window.__calcFx();const SORTS=[['ts','الأحدث أولًا'],['name','حسب الاسم'],['pages','الأكثر صفحات']],so=SORTS.find(z=>z[0]===S.ui.sort)||SORTS[0],lv=S.ui.view==='list',vb=$('vbar');vb.textContent='';
-  const sb1=mk('button','','↕ '+so[1]);sb1.onclick=()=>{S.ui.sort=SORTS[(SORTS.indexOf(so)+1)%SORTS.length][0];save();showLib()};
+  S.ui=S.ui||{};window.__calcFx&&window.__calcFx();const SORTS=[['ts','الأحدث أولًا'],['old','الأقدم أولًا'],['name','حسب الاسم'],['pages','الأكثر صفحات']],so=SORTS.find(z=>z[0]===S.ui.sort)||SORTS[0],lv=S.ui.view==='list',vb=$('vbar');vb.textContent='';
+  const sb1=mk('button','','↕ '+so[1]);sb1.onclick=()=>pick('ترتيب الدفاتر',SORTS.map(z=>[(z===so?'✓ ':'')+z[1],()=>{S.ui.sort=z[0];save();showLib()}]));
   const vb1=mk('button','',lv?'☰ قائمة':'▦ شبكة');vb1.onclick=()=>{S.ui.view=lv?'grid':'list';save();showLib()};vb.append(sb1,vb1);g.classList.toggle('list',lv);
   const rel=t=>{if(!t)return'';const d=Math.floor((new Date().setHours(0,0,0,0)-new Date(t).setHours(0,0,0,0))/864e5);return d<=0?'اليوم':d===1?'أمس':d<7?'قبل '+d+' أيام':new Date(t).toLocaleDateString('ar')};
-  const cmp=(x,y)=>(y.pin?1:0)-(x.pin?1:0)||(so[0]==='name'?(x.title||'').localeCompare(y.title||'','ar'):so[0]==='pages'?y.pages.length-x.pages.length:0)||(y.ts||0)-(x.ts||0);
+  const cmp=(x,y)=>(y.pin?1:0)-(x.pin?1:0)||(so[0]==='old'?(x.ts||0)-(y.ts||0):so[0]==='name'?(x.title||'').localeCompare(y.title||'','ar'):so[0]==='pages'?y.pages.length-x.pages.length:0)||(y.ts||0)-(x.ts||0);
   const rec=flt||cwd||S.books.length<=4?[]:S.books.slice().sort((x,y)=>y.ts-x.ts).slice(0,3);$('recent').hidden=!rec.length;
   rec.forEach(b=>{const c=mk('div','bk rc');c.style.setProperty('--bc',colOf(b));c.append(b.cv?covImg(b):thumb(b,200),mk('b','',b.title||'بدون اسم'));c.onclick=()=>open(b);rr.append(c)});
   bc.hidden=!cwd;
@@ -2625,12 +2707,12 @@ function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('tsm').hidden=t
   const menu=(o,items)=>{const m=mk('button','mn','⋯');m.onclick=e=>{e.stopPropagation();pick(o.title||o.name||'خيارات',items)};return m};
   S.folders.filter(f=>qs?f.name.toLowerCase().includes(qs):!ftag&&sf(f)).sort((x,y)=>x.name.localeCompare(y.name,'ar')).forEach(f=>{
     const c=mk('div','bk'),n=S.books.filter(b=>bfid(b)===f.id).length+S.folders.filter(x=>x.parent===f.id).length;c.style.setProperty('--bc',colOf(f));
-    c.append(menu(f,[['✎ إعادة تسمية',()=>nameIn('اسم المجلد',f.name,v=>{f.name=v;save();showLib()})],['🎨 لون المجلد',()=>colMenu(f)],['🗑 حذف المجلد',()=>askDel(f.name,()=>{S.books.forEach(b=>{if(b.folderId===f.id)b.folderId=f.parent||null});S.folders.forEach(x=>{if(x.parent===f.id)x.parent=f.parent||null});S.folders=S.folders.filter(x=>x!==f);save();showLib()})]]),mk('div','fold','📁'),mk('b','',f.name),mk('span','st',n+' عنصر'));
+    c.append(menu(f,[['✎ إعادة تسمية',()=>nameIn('اسم المجلد',f.name,v=>{f.name=v;save();showLib()})],['🎨 لون المجلد',()=>colMenu(f)],['🎭 تلبيس المجلد',()=>icDlg(f)],['🗑 حذف المجلد',()=>askDel(f.name,()=>{S.books.forEach(b=>{if(b.folderId===f.id)b.folderId=f.parent||null});S.folders.forEach(x=>{if(x.parent===f.id)x.parent=f.parent||null});S.folders=S.folders.filter(x=>x!==f);save();showLib()})]]),foldIc(f),mk('b','',f.name),mk('span','st',n+' عنصر'));
     c.onclick=()=>{cwd=f.id;ftag=null;$('q').value='';showLib()};g.append(c)});
   S.books.filter(sb).sort(cmp).forEach(b=>{const c=mk('div','bk');c.style.setProperty('--bc',colOf(b));
     c.append(menu(b,[[b.pin?'☆ إلغاء التثبيت':'⭐ تثبيت بالأعلى',()=>{b.pin=b.pin?0:1;save();showLib()}],['✎ إعادة تسمية',()=>nameIn('اسم الدفتر',b.title||'',v=>{b.title=v;save();showLib()})],['🏷 وسوم',()=>tagDlg(b)],['📁 نقل لمجلد',()=>moveDlg(b)],['⤓ احفظ نسخة من هالدفتر',()=>exportAll(b)],['🔗 دمج دفتر آخر داخله',()=>mergeDlg(b)],['🎨 لون الغلاف',()=>colMenu(b)],['🖼 غلاف رياضي',()=>covDlg(b)],['🗑 حذف',()=>askDel(b.title||'دفتر',()=>{S.books=S.books.filter(z=>z!==b);save();showLib()})]]),(b.cv?covImg(b):thumb(b,240)),mk('b','',(b.pin?'⭐ ':'')+(b.title||'بدون اسم')),mk('span','st',b.pages.length+' صفحة'+(b.ts?' · '+rel(b.ts):'')+((b.tags||[]).length?' · '+b.tags.join('، '):'')));
     c.onclick=()=>open(b);g.append(c)});
-  if(!g.children.length){const e=mk('div','empty');e.append(mk('div','emp1',flt?'🔍':'📓'),mk('div','',flt?'ما في نتائج':'هالمكان فاضي'));if(!flt){const nb=mk('button','primary empb','＋ ابدأ بدفتر جديد');nb.onclick=newSheet;e.append(nb)}g.append(e)}}
+  if(!g.children.length){const e=mk('div','empty');e.append(mk('div','emp1',flt?'🔍':'📓'),mk('div','',flt?'ما في نتائج':'هالمكان فاضي'));g.append(e)}}
 $('q').oninput=showLib;
 $('plusB').onclick=newSheet;
 $('newB').onclick=newSheet;
@@ -5532,5 +5614,38 @@ const kd=document.getElementById('kdk');if(kd)kd.onclick=()=>{if(st.kind==='calc
 })();
 </script>
 <div id="zbadge" aria-hidden="true"></div>
+<script id="simplifyjs">(function(){
+const H=document.documentElement,$=id=>document.getElementById(id);
+let all=false;try{all=localStorage.getItem('sm-all')==='1'}catch(e){}
+function set(v){all=v;H.classList.toggle('sm-all',v);const t=$('smTg');if(t){t.classList.toggle('on',v);t.querySelector('small').textContent=v?'أقل':'المزيد'}try{localStorage.setItem('sm-all',v?'1':'0')}catch(e){}}
+['tocB','dsB','dkB','bmB','calcB','splB','shB'].forEach(i=>{const b=$(i);if(b)b.classList.add('sm-h')});
+const dock=$('dock'),styl=$('styl');
+if(dock&&styl){const t=document.createElement('button');t.id='smTg';t.title='كل أدوات الكتابة';
+t.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="19" cy="12" r="1.2" fill="currentColor"/></svg><small>المزيد</small>';
+t.onclick=()=>set(!all);dock.insertBefore(t,styl)}
+const grid=$('grid'),qi=$('q');
+if(grid){const add=()=>{if(qi&&qi.value.trim())return;const f=grid.firstElementChild;if(f&&f.classList.contains('smAdd'))return;const t=document.createElement('div');t.className='smAdd';t.setAttribute('role','button');t.innerHTML='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><b>دفتر جديد</b>';t.onclick=()=>{const n=$('newB');if(n)n.click()};grid.prepend(t)};new MutationObserver(add).observe(grid,{childList:true});add()}
+function simplifyNew(){try{const d=$('dlg');if(!d||d.hidden)return;
+const name=d.querySelector('input.cin'),ok=d.querySelector('button.primary'),sw=d.querySelector('button.sw');if(!name||!ok||!sw)return;
+const cr=sw.parentElement,sec=d.lastElementChild,keep=new Set([d.children[0],name,cr,cr.previousElementSibling,ok,sec]);
+const fo=d.children[1];if(fo&&fo.textContent.indexOf('سيُنشأ')===0)keep.add(fo);
+const adv=document.createElement('div');adv.hidden=true;adv.style.cssText='display:flex;flex-direction:column;gap:6px';
+[...d.children].forEach(c=>{if(!keep.has(c))adv.append(c)});
+const tg=document.createElement('button'),ex=[...sec.querySelectorAll('button')].slice(0,3);let o=false;
+const ap=v=>{adv.hidden=!v;tg.textContent=v?'▲ خيارات أقل':'⚙ خيارات أكثر (غلاف، نوع الورق)'};
+tg.onclick=()=>{o=!o;ap(o)};ap(false);cr.after(tg,adv);name.focus()}catch(x){}}
+['plusB','newB'].forEach(i=>{const bt=$(i);if(!bt)return;const old=bt.onclick;bt.onclick=function(e){const r=old?old.call(this,e):undefined;simplifyNew();return r}});
+set(all);
+const mb=$('moreB');
+if(mb){const old=mb.onclick;mb.onclick=function(e){const r=old?old.call(this,e):undefined;
+try{const d=$('dlg');if(d&&!d.hidden&&d.children.length>1){
+const mk=(l,f)=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{d.hidden=true;f()};return b};
+const h=document.createElement('div');h.className='st';h.style.margin='6px 4px 0';h.textContent='الأدوات';
+const L=[['📑 الفهرس','tocB'],['📚 الدوسية','dsB'],['🎨 خلفيات الصفحات','dkB'],['🧮 حاسبة ورسم','calcB'],['◧ تقسيم الشاشة','splB'],['↗ مشاركة','shB']].filter(x=>!(window.__PANE&&x[1]==='splB'));
+const bs=L.map(([l,id])=>mk(l,()=>{const b=$(id);if(b)b.click()}));
+bs.push(mk(all?'🧰 أدوات الكتابة الأساسية فقط':'🧰 كل أدوات الكتابة',()=>set(!all)));
+d.children[0].after(h,...bs)}}catch(x){}
+return r}}
+})();</script>
 </body>
 </html>
