@@ -322,7 +322,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <div id="lib" hidden>
   <div id="tabsL" class="tabs" hidden></div>
 <div id="top"><h1>✍️ دفاتري</h1><input id="q" type="search" placeholder="🔍 ابحث عن دفتر أو وسم"><button id="plusB"><svg viewBox='0 0 24 24' width='22' height='22' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></button><button id="splB2" title="تقسيم الشاشة"><svg viewBox='0 0 24 24' width='22' height='22' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='4' width='18' height='16' rx='2.5'/><path d='M12 4v16'/></svg></button><button id="bkB" title="نسخة احتياطية" aria-label="نسخة احتياطية"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg></button></div><div id="acts" hidden><button id="newB" class="primary">＋ دفتر جديد</button><button id="impB">📎 استيراد PDF كدفتر</button><button id="nfB">📁 مجلد جديد</button></div>
-  <div id="recent" hidden><div class="sec">🕘 آخر ما فتحته</div><div class="rrow" id="rrow"></div></div><div id="bkNote" class="st" style="padding:6px 4px;cursor:pointer"></div><div id="stNote" class="st" style="padding:2px 4px 6px;cursor:pointer;color:#c97a00" hidden></div><div id="crumb" class="row" style="margin-top:12px"></div><div id="tagbar" class="row" style="margin-top:8px"></div><div id="vbar" class="row" style="margin-top:8px;justify-content:space-between"></div><div class="grid" id="grid"></div>
+  <div id="bkNote" class="st" style="padding:6px 4px;cursor:pointer"></div><div id="stNote" class="st" style="padding:2px 4px 6px;cursor:pointer;color:#c97a00" hidden></div><div id="crumb" class="row" style="margin-top:12px"></div><div id="tagbar" class="row" style="margin-top:8px"></div><div id="vbar" class="row" style="margin-top:8px;justify-content:space-between"></div><div class="grid" id="grid"></div>
 </div>
 <div id="ed" hidden>
   <div id="tabsE" class="tabs"></div>
@@ -2688,16 +2688,14 @@ function showLib(){$('erbar').hidden=true;$('lsm').hidden=true;$('tsm').hidden=t
   book=null;$('ed').hidden=true;$('lib').hidden=false;$('calc').hidden=true;ls=null;$('lsbar').hidden=true;dlg.hidden=true;try{tabsRender()}catch(e){}S.folders=S.folders||[];
   if(!S.folders.some(f=>f.id===cwd))cwd=null;
   if(ftag&&!S.books.some(b=>(b.tags||[]).includes(ftag)))ftag=null;
-  const qs=$('q').value.trim().toLowerCase(),flt=!!(qs||ftag),g=$('grid'),bc=$('crumb'),tb=$('tagbar'),rr=$('rrow'),sf=x=>(x.parent||null)===cwd,
+  const qs=$('q').value.trim().toLowerCase(),flt=!!(qs||ftag),g=$('grid'),bc=$('crumb'),tb=$('tagbar'),sf=x=>(x.parent||null)===cwd,
    sb=x=>qs?((x.title||'').toLowerCase().includes(qs)||(x.tags||[]).some(t=>t.toLowerCase().includes(qs))):ftag?(x.tags||[]).includes(ftag):bfid(x)===cwd;
-  g.textContent='';bc.textContent='';tb.textContent='';rr.textContent='';
+  g.textContent='';bc.textContent='';tb.textContent='';
   S.ui=S.ui||{};window.__calcFx&&window.__calcFx();const SORTS=[['ts','الأحدث أولًا'],['old','الأقدم أولًا'],['name','حسب الاسم'],['pages','الأكثر صفحات']],so=SORTS.find(z=>z[0]===S.ui.sort)||SORTS[0],lv=S.ui.view==='list',vb=$('vbar');vb.textContent='';
   const sb1=mk('button','','↕ '+so[1]);sb1.onclick=()=>pick('ترتيب الدفاتر',SORTS.map(z=>[(z===so?'✓ ':'')+z[1],()=>{S.ui.sort=z[0];save();showLib()}]));
   const vb1=mk('button','',lv?'☰ قائمة':'▦ شبكة');vb1.onclick=()=>{S.ui.view=lv?'grid':'list';save();showLib()};vb.append(sb1,vb1);g.classList.toggle('list',lv);
   const rel=t=>{if(!t)return'';const d=Math.floor((new Date().setHours(0,0,0,0)-new Date(t).setHours(0,0,0,0))/864e5);return d<=0?'اليوم':d===1?'أمس':d<7?'قبل '+d+' أيام':new Date(t).toLocaleDateString('ar')};
   const cmp=(x,y)=>(y.pin?1:0)-(x.pin?1:0)||(so[0]==='old'?(x.ts||0)-(y.ts||0):so[0]==='name'?(x.title||'').localeCompare(y.title||'','ar'):so[0]==='pages'?y.pages.length-x.pages.length:0)||(y.ts||0)-(x.ts||0);
-  const rec=flt||cwd||S.books.length<=4?[]:S.books.slice().sort((x,y)=>y.ts-x.ts).slice(0,3);$('recent').hidden=!rec.length;
-  rec.forEach(b=>{const c=mk('div','bk rc');c.style.setProperty('--bc',colOf(b));c.append(b.cv?covImg(b):thumb(b,200),mk('b','',b.title||'بدون اسم'));c.onclick=()=>open(b);rr.append(c)});
   bc.hidden=!cwd;
   const r0=mk('button','','📚 المكتبة');r0.onclick=()=>{cwd=null;showLib()};bc.append(r0);
   const path=[];for(let f=S.folders.find(x=>x.id===cwd);f;f=S.folders.find(x=>x.id===f.parent))path.unshift(f);
@@ -3882,7 +3880,7 @@ function liveDoc(t,lg,nonce){const sc='<base target="_blank"><script>window.__NB
   const m=/<head[^>]*>/i.exec(t);return (m?t.slice(0,m.index+m[0].length)+sc+t.slice(m.index+m[0].length):sc+t)+(nonce?'<!--r'+nonce+'-->':'')}
 function liveInit(d){const fr=document.createElement('iframe');fr.setAttribute('sandbox','allow-scripts allow-forms allow-popups allow-modals allow-downloads');fr.title='live';
   fr.style.cssText='position:absolute;left:0;top:0;width:900px;border:0;background:#fff;transform-origin:0 0';d.fr=fr;d.cv.style.touchAction='none';d.el.classList.add('lvpg');d.el.prepend(fr);
-  const b=document.createElement('button');b.className='lvb';b.onclick=e=>{e.stopPropagation();liveToggle(d)};d.lvb=b;const r=document.createElement('button');r.className='lvr';r.textContent='↺';r.title='رجّع الصفحة الحيّة لحالتها الأصلية';r.setAttribute('aria-label','إعادة الصفحة الحيّة لحالتها الأصلية');r.onclick=e=>{e.stopPropagation();if(r._t){clearTimeout(r._t);r._t=0;r.classList.remove('arm');r.textContent='↺';liveReset(d)}else{r.classList.add('arm');r.textContent='↺ تأكيد؟';gs('اضغط ↺ مرة ثانية لتأكيد الإعادة (بيمسح تفاعلاتك المحفوظة)');r._t=setTimeout(()=>{r._t=0;r.classList.remove('arm');r.textContent='↺'},3000)}};const w=document.createElement('div');w.className='lvw';w.append(r,b);d.lvw=w;d.el.append(w);setLive(d,tool==='tap')}
+  const b=document.createElement('button');b.className='lvb';b.onclick=e=>{e.stopPropagation();liveToggle(d)};d.lvb=b;const r=document.createElement('button');r.className='lvr';r.textContent='↺';r.title='رجّع الصفحة الحيّة لحالتها الأصلية';r.setAttribute('aria-label','إعادة الصفحة الحيّة لحالتها الأصلية');r.onclick=e=>{e.stopPropagation();if(r._t){clearTimeout(r._t);r._t=0;r.classList.remove('arm');r.textContent='↺';liveReset(d)}else{r.classList.add('arm');r.textContent='↺ تأكيد؟';gs('اضغط ↺ مرة ثانية لتأكيد الإعادة (بيمسح تفاعلاتك المحفوظة)');r._t=setTimeout(()=>{r._t=0;r.classList.remove('arm');r.textContent='↺'},3000)}};const w=document.createElement('div');w.className='lvw';w.append(r);d.lvw=w;d.el.append(w);setLive(d,tool==='tap')}
 function syncLive(){try{DOM.forEach(d=>{if(d.fr&&!!d.int!==(tool==='tap'))setLive(d,tool==='tap')})}catch(e){}}
 function liveToggle(d){const tb=document.querySelector('#tools [data-t=tap]');if(tool==='tap'){const nb=(window.__lastInkBtn&&document.contains(window.__lastInkBtn)&&window.__lastInkBtn)||document.querySelector('#tools [data-t=pen]:not([data-x])');if(nb)selTool(nb)}else if(tb)selTool(tb)}
 function setLive(d,on){d.int=on;d.fr.style.visibility='visible';try{rd(d.pg)}catch(e){}d.cv.style.pointerEvents=on?'none':'';d.fr.style.pointerEvents=on?'auto':'none';d.lvb.textContent=on?'👆 وضع الأزرار · اضغط للكتابة':'✍️ وضع الكتابة · اضغط للأزرار'}
@@ -4769,7 +4767,7 @@ const DATA=[
  {k:'impB',n:'📎 استيراد PDF كدفتر',t:'بيحوّل ملف PDF لدفتر بتكتب وبترسم فوق صفحاته.'},
  {k:'nfB',n:'📁 مجلد جديد',t:'بيعمل مجلد لترتّب فيه دفاترك. المجلدات بتنفتح بالضغط عليها وبتقدر تلوّنها وتعيد تسميتها.'},
  {k:'q',n:'🔍 بحث',t:'دوّر على دفتر بالاسم أو بالوسم.'},
- {k:'bk',n:'📓 بطاقة الدفتر',t:'اضغط عليها لتفتح الدفتر. الدفاتر المثبّتة ⭐ بتظهر بالأعلى، والمفتوحة مؤخرًا بتظهر بقسم «آخر ما فتحته».'},
+ {k:'bk',n:'📓 بطاقة الدفتر',t:'اضغط عليها لتفتح الدفتر. الدفاتر المثبّتة ⭐ بتظهر بالأعلى.'},
  {k:'bkmenu',n:'⋯ خيارات الدفتر',t:'تثبيت بالأعلى، إعادة تسمية، وسوم، نقل لمجلد، حفظ نسخة، دمج دفتر آخر داخله، لون الغلاف، غلاف رياضي، وحذف.'},
  {k:'vbar',n:'↕ الترتيب والعرض',t:'الزر الأول بيبدّل الترتيب: الأحدث أولًا، حسب الاسم، أو الأكثر صفحات. الزر التاني بيبدّل بين شبكة وقائمة.'},
  {k:'tag',n:'🏷 الوسوم',t:'اضغط على وسم لتشوف دفاتره بس، واضغط عليه مرة ثانية للإلغاء. بتضيف الوسوم من ⋯ على الدفتر.'},
