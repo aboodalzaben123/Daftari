@@ -1105,6 +1105,10 @@ function drawCorners(g,pg,cw,ch){
       g.fillText(t,x+w/2,y+h/2+u)}
     g.restore()})}
 function cmRedraw(){if(!book)return;book.pages.forEach(p=>{if(p.tpl==='corners'&&!p.bg)rd(p)})}
+/* v12: الهوامش بتنرسم بس على صفحات قالبها «هوامش الزوايا». فلما تعدّل من ⋯ المزيد ← هاي الصفحة وصفحتك بقالب عادي، ما كان يبين شي.
+   هلأ أول تعديل (لون/نص/مدى/إضافة/شكل ورق) بيحوّل الصفحة الحالية لقالب الهوامش لحاله (بيتراجع عنه بزر التراجع). الصفحات الخاصة (غلاف/فهرس/PDF/حيّة/ورقة عمل/امتحان/قوانين) ما بتتحوّل عشان ما نخرّب تصميمها. */
+function cmCan(q){return!!q&&!q.bg&&!q.cvr&&!q.idx&&!q.live&&(!q.tpl||['blank','lined','wide','grid','dots','cornell'].includes(q.tpl))}
+function cmEnsure(){const q=book&&book.pages[curPg];if(q&&q.tpl!=='corners'&&cmCan(q))applyTpl('corners',false)}
 function cmFix(cm,r){ /* الهامش المعدَّل له الأولوية: بقصّ أو بتقسيم أي هامش ثاني بنفس الزاوية بتتقاطع معه الصفحات */
   if(r.b<r.a)r.b=r.a;let n=0;
   cm.slice().forEach(o=>{if(o===r||o.c!==r.c||o.a>r.b||o.b<r.a)return;
@@ -1114,8 +1118,10 @@ function cmFix(cm,r){ /* الهامش المعدَّل له الأولوية: ب
     else{cm.splice(cm.indexOf(o),1);n++}});
   return n}
 function openCm(){
-  if(!book)return;if(!book.cm)book.cm=CM_DEF();const cm=book.cm,np=book.pages.length,ch=()=>{save();cmRedraw()};
+  if(!book)return;if(!book.cm)book.cm=CM_DEF();const cm=book.cm,np=book.pages.length,ch=()=>{cmEnsure();ntU();save();cmRedraw()};
   dlg.textContent='';dlg.hidden=false;dlg.append(mk('b','','🔲 هوامش الزوايا'));
+  const nt=mk('span','st'),ntU=()=>{const q=book.pages[curPg];nt.textContent=!q||(q.tpl==='corners'&&!q.bg)?'':cmCan(q)?'ℹ️ قالب هاي الصفحة مش «هوامش الزوايا». أول ما تغيّر لون أو نص أو مدى رح تتحوّل لحالها وتشوف التغيير مباشرة.':'ℹ️ هاي الصفحة (غلاف / فهرس / PDF / ورقة خاصة) ما بتعرض الهوامش. التغييرات بتنطبق على صفحات الهوامش بالدفتر.';nt.hidden=!nt.textContent};
+  ntU();dlg.append(nt);
   const pp=mk('div','row'),pbs=CM_P.map(([v,l])=>{const b=mk('button','',l);b.onclick=()=>{book.cp=v;rf();ch()};pp.append(b);return[v,b]}),rf=()=>pbs.forEach(([v,b])=>b.classList.toggle('on',v===(book.cp||'lined')));
   rf();dlg.append(mk('span','st','شكل الورق'),pp);
   dlg.append(mk('span','st','كل هامش بيظهر بزاوية، من صفحة كذا لصفحة كذا. لما تعدّل مدى هامش أو تضيف هامش جديد، المدى المتداخل لهامش ثاني بنفس الزاوية بيتعدّل لحاله. الدفتر فيه '+np+' صفحة.'));
