@@ -4232,7 +4232,7 @@ $('shB').onclick=()=>shareDlg();
 (function(){const st=document.createElement('style');st.textContent='.pgc.sel{border-color:var(--accent,#2f5bea)!important;background:color-mix(in srgb,var(--accent,#2f5bea) 16%,transparent)}.pgc.sel:after{content:"✓";position:absolute;top:4px;inset-inline-start:4px;width:24px;height:24px;border-radius:50%;background:var(--accent,#2f5bea);color:#fff;font-size:15px;line-height:24px;font-weight:700}';document.head.append(st)})();
 
 /* ===== أدواتي: ملف HTML بينحفظ كأداة، بيشتغل بلوحة عايمة فوق أي دفتر، وبيحكي مع التطبيق عبر جسر (postMessage) ===== */
-/* أوامر الجسر: storage.* / notify / page.info / page.readText / book.readText / page.insertImage / page.insertText / page.insertLive (الأوامر page/book بدها موافقة) */
+/* أوامر الجسر: storage.* / notify / page.info / page.readText / book.readText / page.insertImage / page.insertText / page.insertLive / book.addPages (الأوامر page/book بدها موافقة) */
 /* التخزين: nbtools = قائمة الأدوات، nbtool:<id> = كود الأداة، nbtooldata:<id> = بيانات الأداة (مفصولة لكل أداة) */
 const TQ=1.5e6,TOPEN=new Map(),hasOwn=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 let tZ=14;
@@ -4317,7 +4317,8 @@ function toolInner(){
     insertText:function(text,o){return send('page.insertText',cp(o,'text',text))},
     insertLive:function(html,o){return send('page.insertLive',cp(o,'html',html))},
     insertSelf:function(o){return send('page.insertLive',o||{})}};
-  NB.book={readText:function(o){return send('book.readText',o||{})}};
+  NB.book={readText:function(o){return send('book.readText',o||{})},
+    addPages:function(pages,o){return send('book.addPages',cp(o,'pages',pages))}};
   function str(v){return typeof v==='string'?v:JSON.stringify(v)}
   var LS={
     getItem:function(k){k=String(k);return OWN.call(D,k)?str(D[k]):null},
@@ -4352,7 +4353,7 @@ const TACT={
 
 /* --- أوامر الصفحة: قراءة/كتابة بالدفتر المفتوح. كل أداة لازم المستخدم يوافق عليها (مرة وحدة أو دايما) --- */
 /* r = قراءة نص، w = إضافة صور/نصوص. القائمة بتحدد صلاحية كل أمر */
-const TPERM={'page.info':'r','page.readText':'r','book.readText':'r','page.insertImage':'w','page.insertText':'w','page.insertLive':'w'},
+const TPERM={'page.info':'r','page.readText':'r','book.readText':'r','page.insertImage':'w','page.insertText':'w','page.insertLive':'w','book.addPages':'w'},
   TPDESC={r:'تقرأ نص الدفتر وصفحاته',w:'تضيف صور ونصوص على صفحة الدفتر الحالية'};
 async function tpSave(r,lv){try{const l=await toolsList(),x=l.find(q=>q.id===r.id);if(!x)return;x.perm=Object.assign({},x.perm,{[lv]:1});await toolsPut(l)}catch(e){}}
 function tpAsk(r,lv){
@@ -4426,6 +4427,34 @@ function tpTxt(r,p){
   pg.items.push(it);undo.push({pg,add:it});redo=[];rd(pg);save();
   return{inserted:true,page:book.pages.indexOf(pg)+1}}
 
+
+/* إضافة صفحات كاملة بعد الصفحة الحالية: كل صفحة {tpl?,title?,paper?,items:[{src,x,y,w,h,lock?,tex?}]}. lock:true = عنصر مقفول (للتصميم) */
+async function tpAddPages(r,p){
+  tpWriteGate(r);
+  if(!book||!book.pages||!book.pages.length)throw new Error('no notebook is open');
+  const L=Array.isArray(p.pages)?p.pages:null;
+  if(!L||!L.length)throw new Error('pages[] required');
+  if(L.length>60)throw new Error('too many pages (max 60)');
+  const RE=/^data:image\/(png|jpeg|jpg|webp|gif);base64,[A-Za-z0-9+\/=\s]+$/;let tot=0;
+  const pgs=L.map(q=>{
+    if(!q||typeof q!=='object')throw new Error('bad page');
+    const its=Array.isArray(q.items)?q.items:[];
+    if(its.length>200)throw new Error('too many items in a page (max 200)');
+    const items=its.map(it=>{
+      if(!it||typeof it.src!=='string'||!RE.test(it.src))throw new Error('item.src must be a png/jpeg/webp/gif data URL');
+      tot+=it.src.length;if(tot>8e7)throw new Error('data too large');
+      const o={k:'i',src:it.src,x:tpNum(it.x,0,-1,2),y:tpNum(it.y,0,-1,4),w:tpNum(it.w,1,.01,3),h:tpNum(it.h,1,.01,4)};
+      if(it.lock===true)o.lk=1;
+      if(typeof it.tex==='string'&&it.tex.trim()&&it.tex.length<=2e4)o.tex=it.tex;
+      return o});
+    const o={tpl:TPL.includes(q.tpl)?q.tpl:'blank',items};
+    if(typeof q.title==='string'&&q.title.trim())o.ti=q.title.trim().slice(0,80);
+    if(typeof q.paper==='string'&&/^#[0-9a-f]{6}$/i.test(q.paper))o.pc=q.paper;
+    return newPage(o)});
+  const at=covClamp(curPg+1);
+  book.pages.splice(at,0,...pgs);renderBook();goPg(at);save();
+  return{pages:pgs.length,page:at+1}}
+
 /* صفحة حيّة: أي HTML بيصير صفحة تفاعلية بالدفتر (أداة 👆 تفاعل بتكبس الأزرار، وبتكتب فوقها بأي قلم). بدون html = نسخة من الأداة نفسها */
 async function tpLive(r,p){
   tpWriteGate(r);
@@ -4449,7 +4478,8 @@ Object.assign(TACT,{
     return{count:N,pages,truncated:cut||b-a+1>300}},
   'page.insertImage':tpImg,
   'page.insertText':tpTxt,
-  'page.insertLive':tpLive});
+  'page.insertLive':tpLive,
+  'book.addPages':tpAddPages});
 async function toolCall(r,m){
   const reply=(ok,v)=>{try{r.fr.contentWindow.postMessage(ok?{nbToolRes:m.id,ok:true,result:v}:{nbToolRes:m.id,ok:false,error:String(v)},'*')}catch(e){}};
   if(typeof m.action!=='string'||!hasOwn(TACT,m.action))return reply(false,'action not allowed');
