@@ -4354,7 +4354,7 @@ const TACT={
 /* --- أوامر الصفحة: قراءة/كتابة بالدفتر المفتوح. كل أداة لازم المستخدم يوافق عليها (مرة وحدة أو دايما) --- */
 /* r = قراءة نص، w = إضافة صور/نصوص. القائمة بتحدد صلاحية كل أمر */
 const TPERM={'page.info':'r','page.readText':'r','book.readText':'r','page.insertImage':'w','page.insertText':'w','page.insertLive':'w','book.addPages':'w'},
-  TPDESC={r:'تقرأ نص الدفتر وصفحاته',w:'تضيف صور ونصوص على صفحة الدفتر الحالية'};
+  TPDESC={r:'تقرأ نص الدفتر وصفحاته',w:'تضيف صور ونصوص وصفحات كاملة للدفتر'};
 async function tpSave(r,lv){try{const l=await toolsList(),x=l.find(q=>q.id===r.id);if(!x)return;x.perm=Object.assign({},x.perm,{[lv]:1});await toolsPut(l)}catch(e){}}
 function tpAsk(r,lv){
   if(r.pm[lv])return Promise.resolve(true);
@@ -4427,34 +4427,6 @@ function tpTxt(r,p){
   pg.items.push(it);undo.push({pg,add:it});redo=[];rd(pg);save();
   return{inserted:true,page:book.pages.indexOf(pg)+1}}
 
-
-/* إضافة صفحات كاملة بعد الصفحة الحالية: كل صفحة {tpl?,title?,paper?,items:[{src,x,y,w,h,lock?,tex?}]}. lock:true = عنصر مقفول (للتصميم) */
-async function tpAddPages(r,p){
-  tpWriteGate(r);
-  if(!book||!book.pages||!book.pages.length)throw new Error('no notebook is open');
-  const L=Array.isArray(p.pages)?p.pages:null;
-  if(!L||!L.length)throw new Error('pages[] required');
-  if(L.length>60)throw new Error('too many pages (max 60)');
-  const RE=/^data:image\/(png|jpeg|jpg|webp|gif);base64,[A-Za-z0-9+\/=\s]+$/;let tot=0;
-  const pgs=L.map(q=>{
-    if(!q||typeof q!=='object')throw new Error('bad page');
-    const its=Array.isArray(q.items)?q.items:[];
-    if(its.length>200)throw new Error('too many items in a page (max 200)');
-    const items=its.map(it=>{
-      if(!it||typeof it.src!=='string'||!RE.test(it.src))throw new Error('item.src must be a png/jpeg/webp/gif data URL');
-      tot+=it.src.length;if(tot>8e7)throw new Error('data too large');
-      const o={k:'i',src:it.src,x:tpNum(it.x,0,-1,2),y:tpNum(it.y,0,-1,4),w:tpNum(it.w,1,.01,3),h:tpNum(it.h,1,.01,4)};
-      if(it.lock===true)o.lk=1;
-      if(typeof it.tex==='string'&&it.tex.trim()&&it.tex.length<=2e4)o.tex=it.tex;
-      return o});
-    const o={tpl:TPL.includes(q.tpl)?q.tpl:'blank',items};
-    if(typeof q.title==='string'&&q.title.trim())o.ti=q.title.trim().slice(0,80);
-    if(typeof q.paper==='string'&&/^#[0-9a-f]{6}$/i.test(q.paper))o.pc=q.paper;
-    return newPage(o)});
-  const at=covClamp(curPg+1);
-  book.pages.splice(at,0,...pgs);renderBook();goPg(at);save();
-  return{pages:pgs.length,page:at+1}}
-
 /* صفحة حيّة: أي HTML بيصير صفحة تفاعلية بالدفتر (أداة 👆 تفاعل بتكبس الأزرار، وبتكتب فوقها بأي قلم). بدون html = نسخة من الأداة نفسها */
 async function tpLive(r,p){
   tpWriteGate(r);
@@ -4468,6 +4440,31 @@ async function tpLive(r,p){
   if(book.pages.length<=n0)throw new Error('live page could not be inserted');
   if(p.interact!==false){const tb=document.querySelector('#tools [data-t=tap]');if(tb)tb.click()}
   return{inserted:true,page:curPg+1}}
+/* صفحات كاملة: كل صفحة بتنضاف كصفحة حقيقية بعد الصفحة الحالية. القطعة اللي فيها lock:true بتنقفل (التصميم)، والباقي بيتحرك بأداة التحديد */
+async function tpPages(r,p){
+  tpWriteGate(r);
+  if(!book||!book.pages||!book.pages.length)throw new Error('no notebook is open');
+  const L=p.pages;if(!Array.isArray(L)||!L.length)throw new Error('pages[] required');if(L.length>60)throw new Error('too many pages (max 60)');
+  const RX=/^data:image\/(png|jpeg|jpg|webp|gif);base64,/;let tot=0;const out=[];
+  for(const q of L){
+    if(!q||typeof q!=='object')throw new Error('bad page');
+    const ar=tpNum(q.ar,1.414,1,2),tpl=typeof q.tpl==='string'&&/^(blank|dots|lined|grid|wide)$/.test(q.tpl)?q.tpl:'blank',its=[];
+    if(!Array.isArray(q.items)||q.items.length>400)throw new Error('items[] required (max 400 per page)');
+    for(const it of q.items){
+      if(!it||typeof it.src!=='string'||!RX.test(it.src))throw new Error('items need png/jpeg/webp/gif data URLs');
+      tot+=it.src.length;if(tot>6e7)throw new Error('data too large (max ~45MB)');
+      const o={k:'i',src:it.src,x:tpNum(it.x,0,-.5,1.5),y:tpNum(it.y,0,-.5,ar+.5),w:tpNum(it.w,.5,.001,1.5),h:tpNum(it.h,.2,.001,ar+.5)};
+      if(it.lock===true)o.lk=1;
+      if(typeof it.tex==='string'&&it.tex&&it.tex.length<4000)o.tex=it.tex;
+      its.push(o)}
+    const pg=newPage({tpl,ar,items:its});
+    if(typeof q.title==='string'&&q.title.trim())pg.ti=q.title.trim().slice(0,80);
+    if(typeof q.paper==='string'&&/^#[0-9a-f]{6}$/i.test(q.paper)&&q.paper.toLowerCase()!=='#ffffff')pg.pc=q.paper;else delete pg.pc;
+    out.push(pg)}
+  const at=covClamp(curPg+1);
+  book.pages.splice(at,0,...out);
+  renderBook();goPg(at);save();
+  return{inserted:true,pages:out.length,from:at+1,to:at+out.length}}
 Object.assign(TACT,{
   'page.info':(r,p)=>{const{pg,i}=tpPg(p);return{page:i+1,count:book.pages.length,notebook:book.title||'',title:pg.ti||'',template:pg.tpl||'',hasPdfBackground:!!pg.bg,hasPdfText:!!(pg.tx&&pg.tx.length),items:(pg.items||[]).length}},
   'page.readText':(r,p)=>{const{pg,i}=tpPg(p),o=tpText(pg);o.page=i+1;return o},
@@ -4479,7 +4476,7 @@ Object.assign(TACT,{
   'page.insertImage':tpImg,
   'page.insertText':tpTxt,
   'page.insertLive':tpLive,
-  'book.addPages':tpAddPages});
+  'book.addPages':tpPages});
 async function toolCall(r,m){
   const reply=(ok,v)=>{try{r.fr.contentWindow.postMessage(ok?{nbToolRes:m.id,ok:true,result:v}:{nbToolRes:m.id,ok:false,error:String(v)},'*')}catch(e){}};
   if(typeof m.action!=='string'||!hasOwn(TACT,m.action))return reply(false,'action not allowed');
