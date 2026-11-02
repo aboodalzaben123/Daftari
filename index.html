@@ -3421,7 +3421,7 @@ function geoPath(g,t,x0,y0,x1,y1,u){
 }
 function rdp(P,e){if(P.length<3)return P;const a=P[0],b=P[P.length-1],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1e-9;let m=0,k=0;for(let i=1;i<P.length-1;i++){const d=Math.abs(dy*(P[i][0]-a[0])-dx*(P[i][1]-a[1]))/l;if(d>m){m=d;k=i}}if(m<=e)return[a,b];return rdp(P.slice(0,k+1),e).slice(0,-1).concat(rdp(P.slice(k),e))}
 function recog(it){
-  const raw=it.p.map(q=>[q[0],q[1]]);let L=0,x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  const raw=it.p.map(q=>[q[0],q[1]]),PR=(it.p[0]&&typeof it.p[0][2]==='number')?it.p[0][2]:.5;let L=0,x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
   raw.forEach((q,i)=>{if(i)L+=Math.hypot(q[0]-raw[i-1][0],q[1]-raw[i-1][1]);x0=Math.min(x0,q[0]);y0=Math.min(y0,q[1]);x1=Math.max(x1,q[0]);y1=Math.max(y1,q[1])});
   const dg=Math.hypot(x1-x0,y1-y0);
   if(dg<.03||L<.05)return false;
@@ -3431,47 +3431,94 @@ function recog(it){
   P.push(raw[raw.length-1]);
   P=P.map((q,i)=>i===0||i===P.length-1?q:[(P[i-1][0]+2*q[0]+P[i+1][0])/4,(P[i-1][1]+2*q[1]+P[i+1][1])/4]);
   const n=P.length,a=P[0],z=P[n-1],chord=Math.hypot(z[0]-a[0],z[1]-a[1]);
-  const fin=(k,p)=>{it.k=k;it.p=p;delete it.n;delete it.a;return true};
+  const fin=(k,p)=>{it.k=k;it.p=p;if(k!=='s')delete it.n;delete it.a;return true};
   const dseg=(q,u,v)=>{const dx=v[0]-u[0],dy=v[1]-u[1],l2=dx*dx+dy*dy||1e-12;let t=((q[0]-u[0])*dx+(q[1]-u[1])*dy)/l2;t=Math.max(0,Math.min(1,t));return Math.hypot(q[0]-u[0]-t*dx,q[1]-u[1]-t*dy)};
   const ang=(p,q,r)=>{let t=Math.abs(Math.atan2(r[1]-q[1],r[0]-q[0])-Math.atan2(q[1]-p[1],q[0]-p[0]));if(t>Math.PI)t=2*Math.PI-t;return t*180/Math.PI};
+  /* v13.35: تقاطع ذاتي (حرف «لا»، حرف e، خربشة...) ما بنحوّله لشكل، ونجمة خماسية (متقاطعة أو مفرّغة) بتتحوّل لنجمة منتظمة */
+  const segX=(p,q,r,t)=>{const o=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);const d1=o(p,q,r),d2=o(p,q,t),d3=o(r,t,p),d4=o(r,t,q);return d1*d2<0&&d3*d4<0};
+  const selfX=()=>{for(let i=0;i<n-1;i++)for(let j=i+8;j<n-1;j++)if(segX(P[i],P[i+1],P[j],P[j+1]))return true;return false};
+  const starFit=V0=>{let V=V0.map(q=>[q[0],q[1]]);{const D=dg,W=[];V.forEach(v=>{const l=W[W.length-1];if(l&&Math.hypot(v[0]-l[0],v[1]-l[1])<.12*D){l[0]=(l[0]+v[0])/2;l[1]=(l[1]+v[1])/2}else W.push(v)});while(W.length>2&&Math.hypot(W[0][0]-W[W.length-1][0],W[0][1]-W[W.length-1][1])<.12*D){const l=W.pop();W[0][0]=(W[0][0]+l[0])/2;W[0][1]=(W[0][1]+l[1])/2}V=W}const k=V.length;if(k!==5&&k!==10)return null;let cx=0,cy=0;V.forEach(q=>{cx+=q[0];cy+=q[1]});cx/=k;cy/=k;
+    const r=V.map(q=>Math.hypot(q[0]-cx,q[1]-cy)),an=V.map(q=>Math.atan2(q[1]-cy,q[0]-cx)),st=[];
+    for(let i=0;i<k;i++){let d=an[(i+1)%k]-an[i];while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;st.push(d)}
+    const dir=st.reduce((x,v)=>x+v,0)>0?1:-1,want=(k===5?144:36)*Math.PI/180,mean=a=>a.reduce((x,v)=>x+v,0)/a.length;
+    if(st.some(d=>Math.abs(d*dir-want)>(k===5?.5:.28)))return null;
+    const step=k===5?4*Math.PI/5:Math.PI/5;let sx=0,sy=0;for(let i=0;i<k;i++){const t=an[i]-i*dir*step;sx+=Math.cos(t);sy+=Math.sin(t)}const t0=Math.atan2(sy,sx),out=[];
+    if(k===5){const m=mean(r);if(r.some(v=>Math.abs(v-m)>.3*m))return null;for(let i=0;i<5;i++){const t=t0+i*dir*step;out.push([cx+m*Math.cos(t),cy+m*Math.sin(t)])}return out}
+    const ev=r.filter((v,i)=>i%2===0),od=r.filter((v,i)=>i%2===1),me=mean(ev),mo=mean(od),R1=Math.max(me,mo),R2=Math.min(me,mo),ro=me>=mo?0:1;
+    if(R2/R1<.3||R2/R1>.78||ev.some(v=>Math.abs(v-me)>.3*me)||od.some(v=>Math.abs(v-mo)>.3*mo))return null;
+    for(let i=0;i<10;i++){const t=t0+i*dir*step,rr=(i%2===ro)?R1:R2;out.push([cx+rr*Math.cos(t),cy+rr*Math.sin(t)])}return out};
   /* v13.31: زاوية (خطين متصلين) وجذر تربيعي: شكل مفتوح بزوايا حادة، بيتحوّل لخطوط مستقيمة (بنفس نقاط 's' فبيتحرك ويدور متل القوس) */
-  const dens=V=>{const o=[],pr=raw[0][2],mk=(x,y)=>{const q=[x,y];if(pr!==undefined)q.push(pr);return q};for(let i=0;i<V.length-1;i++){const u=V[i],v=V[i+1],l=Math.hypot(v[0]-u[0],v[1]-u[1]),m=Math.max(1,Math.ceil(l/.004));for(let j=0;j<m;j++){const t=j/m;o.push(mk(u[0]+(v[0]-u[0])*t,u[1]+(v[1]-u[1])*t))}}o.push(mk(V[V.length-1][0],V[V.length-1][1]));return o};
-  const openPoly=()=>{
-    const V=rdp(P,.045*dg).map(q=>[q[0],q[1]]),n=V.length,ln=(u,v)=>Math.hypot(v[0]-u[0],v[1]-u[1]);
-    if(n===3){const l0=ln(V[0],V[1]),l1=ln(V[1],V[2]),tn=ang(V[0],V[1],V[2]);
-      if(l0<.18*dg||l1<.18*dg||tn<25||tn>155)return null;
-      const A=V[0],B=V[1],C=V[2];
-      /* تعديل الأفقي/العمودي لأول ضلع، وبعدين لو الزاوية قريبة من 90° بنخليها قائمة */
-      let dx=B[0]-A[0],dy=B[1]-A[1],t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;
-      if(t<6||t>174)B[1]=A[1];else if(Math.abs(t-90)<6)B[0]=A[0];
-      if(Math.abs(tn-90)<8){const ux=(B[0]-A[0])/ln(A,B),uy=(B[1]-A[1])/ln(A,B),cr=ux*(C[1]-B[1])-uy*(C[0]-B[0]),sg=cr>=0?1:-1;C[0]=B[0]-sg*uy*l1;C[1]=B[1]+sg*ux*l1}
-      else{dx=C[0]-B[0];dy=C[1]-B[1];t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;if(t<6||t>174)C[1]=B[1];else if(Math.abs(t-90)<6)C[0]=B[0]}
-      return dens([A,B,C])}
-    if(n===4||n===5){const o=n-4,S=V[o],B=V[o+1],T=V[o+2],E=V[o+3],up=ln(B,T),dn=ln(S,B),bar=E[0]-T[0];
-      if(bar<.2*dg||Math.abs(E[1]-T[1])>.2*bar)return null;
-      if(!(T[1]<B[1]&&T[0]>B[0]&&(B[1]-T[1])>.8*(T[0]-B[0])))return null;
-      if(!(B[1]>S[1]&&dn<.7*up&&dn>.04*dg))return null;
-      if(o&&!(V[1][0]>V[0][0]&&V[1][1]<=V[0][1]&&ln(V[0],V[1])<.5*up))return null;
-      const W=V.map(q=>[q[0],q[1]]);W[W.length-1][1]=T[1];return dens(W)}
+  const dens=V=>{const o=[],pr=PR,mk=(x,y)=>[x,y,pr];for(let i=0;i<V.length-1;i++){const u=V[i],v=V[i+1],l=Math.hypot(v[0]-u[0],v[1]-u[1]),m=Math.max(1,Math.ceil(l/.004));for(let j=0;j<m;j++){const t=j/m;o.push(mk(u[0]+(v[0]-u[0])*t,u[1]+(v[1]-u[1])*t))}}o.push(mk(V[V.length-1][0],V[V.length-1][1]));return o};
+  const openPoly=cross=>{
+    const m=P.length;if(m<10)return null;
+    /* ملاءمة خط منكسر بـk ضلع (برمجة ديناميكية): الأخطاء بتنقاس بالمسافة عن الضلع */
+    const cm=[];for(let i=0;i<m;i++){cm.push(new Float64Array(m));for(let j=i+2;j<m;j++){let q=0;for(let t=i+1;t<j;t++){const d=dseg(P[t],P[i],P[j]);q+=d*d}cm[i][j]=q}}
+    const fit=K=>{let prev=new Float64Array(m).fill(1e18);prev[0]=0;const bk=[];
+      for(let k=1;k<=K;k++){const cur=new Float64Array(m).fill(1e18),bp=new Int16Array(m).fill(-1);
+        for(let j=1;j<m;j++)for(let i=0;i<j;i++){if(prev[i]>=1e17)continue;const c=prev[i]+(j-i<2?0:cm[i][j]);if(c<cur[j]){cur[j]=c;bp[j]=i}}
+        bk.push(bp);prev=cur}
+      const ix=[m-1];for(let k=K-1;k>=0;k--)ix.unshift(bk[k][ix[0]]);
+      return{ix,e:Math.sqrt(prev[m-1]/m)/dg}};
+    /* خط مناسب لنقاط بين فهرسين (بدون هامش جنب الزوايا المدوّرة) */
+    const line=(i,j,mi,mj)=>{const a0=i+mi,b0=j-mj;let n=0,cx=0,cy=0;for(let t=a0;t<=b0;t++){cx+=P[t][0];cy+=P[t][1];n++}if(n<2)return null;cx/=n;cy/=n;let sxx=0,syy=0,sxy=0;for(let t=a0;t<=b0;t++){const u=P[t][0]-cx,v=P[t][1]-cy;sxx+=u*u;syy+=v*v;sxy+=u*v}const th=.5*Math.atan2(2*sxy,sxx-syy);return{cx,cy,ux:Math.cos(th),uy:Math.sin(th)}};
+    const verts=ix=>{const K=ix.length-1,L=[];for(let k=0;k<K;k++){const g=ix[k+1]-ix[k],mg=Math.max(1,Math.floor(.2*g));L.push(line(ix[k],ix[k+1],k?mg:0,k<K-1?mg:0))}
+      if(L.some(x=>!x))return null;
+      const proj=(q,l)=>{const t=(q[0]-l.cx)*l.ux+(q[1]-l.cy)*l.uy;return[l.cx+l.ux*t,l.cy+l.uy*t]};
+      const V=[proj(P[0],L[0])];
+      for(let k=1;k<K;k++){const p=L[k-1],q=L[k],cr=p.ux*q.uy-p.uy*q.ux,s=P[ix[k]];let v=s;
+        if(Math.abs(cr)>.2){const t=((q.cx-p.cx)*q.uy-(q.cy-p.cy)*q.ux)/cr,x=[p.cx+p.ux*t,p.cy+p.uy*t];if(Math.hypot(x[0]-s[0],x[1]-s[1])<.15*dg)v=x}
+        V.push([v[0],v[1]])}
+      V.push(proj(P[m-1],L[K-1]));return V};
+    const ln=(u,v)=>Math.hypot(v[0]-u[0],v[1]-u[1]);
+    /* خط بيقطع حاله (حرف «لا» مثلاً): نفس الرسمة بخطوط مستقيمة وزوايا حادة وبيضل التقاطع */
+    if(cross){for(const K of[3,4,5]){const F=fit(K);if(F.e>.03)continue;const V=verts(F.ix);if(!V)continue;
+        let bad=false;for(let i=0;i<K;i++){const l=ln(V[i],V[i+1]);if(l<(i===0||i===K-1?.06:.12)*dg)bad=true}if(bad)continue;
+        for(let i=0;i<K;i++){const dx=V[i+1][0]-V[i][0],dy=V[i+1][1]-V[i][1],t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;if(t<6||t>174)V[i+1][1]=V[i][1];else if(Math.abs(t-90)<6)V[i+1][0]=V[i][0]}
+        return{kind:'cross',e:F.e,pts:dens(V)}}return null}
+    /* جذر: (تيك) + نزول + صعود + خط أفقي */
+    for(const K of[4,3]){const F=fit(K);if(F.e>.035)continue;const V=verts(F.ix);if(!V)continue;const o=K-3,S=V[o],B=V[o+1],T=V[o+2],E=V[o+3],up=ln(B,T),dn=ln(S,B),bar=E[0]-T[0];
+      if(bar<.2*dg||Math.abs(E[1]-T[1])>.5*bar)continue;
+      if(!(T[1]<B[1]&&(B[1]-T[1])>.8*Math.abs(T[0]-B[0])))continue;
+      if(!(B[1]>S[1]&&dn<.7*up&&dn>.04*dg))continue;
+      if(o&&!(V[1][0]>V[0][0]&&V[1][1]<=V[0][1]&&ln(V[0],V[1])<.5*up))continue;
+      if(!(T[1]<=S[1]))continue;V[V.length-1][1]=T[1];return{kind:'root',e:F.e,pts:dens(V)}}
+    /* زاوية: ضلعين */
+    {const F=fit(2);if(F.e<.03){const V=verts(F.ix);if(V){const[A,B,C]=V,l0=ln(A,B),l1=ln(B,C),tn=ang(A,B,C);
+      if(l0>=.18*dg&&l1>=.18*dg&&tn>=30&&tn<=155){
+        let dx=B[0]-A[0],dy=B[1]-A[1],t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;
+        if(t<6||t>174)B[1]=A[1];else if(Math.abs(t-90)<6)B[0]=A[0];
+        if(Math.abs(tn-90)<10){const ux=(B[0]-A[0])/ln(A,B),uy=(B[1]-A[1])/ln(A,B),cr=ux*(C[1]-B[1])-uy*(C[0]-B[0]),sg=cr>=0?1:-1;C[0]=B[0]-sg*uy*l1;C[1]=B[1]+sg*ux*l1}
+        else{dx=C[0]-B[0];dy=C[1]-B[1];t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;if(t<6||t>174)C[1]=B[1];else if(Math.abs(t-90)<6)C[0]=B[0]}
+        return{kind:'angle',e:F.e,pts:dens([A,B,C])}}}}}
+    /* v13.37: أي شكل من خطوط مستقيمة (Z، N، W، M، درج، موجة مربعة...): 3-6 أضلاع، كل زاوية حادة (≥38°) والخطأ صغير؛ المنحنيات الناعمة بتطلع برا لأن زواياها صغيرة */
+    for(const K of[3,4,5,6]){const F=fit(K);if(F.e>.013)continue;const V=verts(F.ix);if(!V)continue;
+      /* لازم تقريباً كل النقاط (≥94%) قريبة من الأضلاع المستقيمة؛ المنحنيات الناعمة (S، موجة...) بتطلع برا */
+      {let ok=0;const tol=.01*dg;P.forEach(q=>{let d=1e9;for(let i=0;i<K;i++)d=Math.min(d,dseg(q,V[i],V[i+1]));if(d<tol)ok++});if(ok<.94*P.length)continue}
+      let bad=false;for(let i=0;i<K;i++){const l=ln(V[i],V[i+1]);if(l<(i===0||i===K-1?.07:.1)*dg)bad=true;if(i>0&&ang(V[i-1],V[i],V[i+1])<38)bad=true}
+      if(bad)continue;
+      for(let i=0;i<K;i++){const dx=V[i+1][0]-V[i][0],dy=V[i+1][1]-V[i][1],t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;if(t<7||t>173)V[i+1][1]=V[i][1];else if(Math.abs(t-90)<7)V[i+1][0]=V[i][0]}
+      return{kind:'poly',e:F.e,pts:dens(V)}}
     return null};
   /* ١) خط مستقيم: شكل مفتوح وانحرافه عن الوتر صغير */
   if(chord>.35*dg){
+    if(selfX()){const X=openPoly(true);return X?fin('s',X.pts):false}
     let dev=0;P.forEach(q=>{dev=Math.max(dev,dseg(q,a,z))});
     if(dev<Math.max(.07*chord,.006)){const e=[z[0],z[1]],dx=z[0]-a[0],dy=z[1]-a[1],t=Math.abs(Math.atan2(dy,dx))*180/Math.PI;
       if(t<6||t>174)e[1]=a[1];else if(Math.abs(t-90)<6)e[0]=a[0];
       return fin('l',[[a[0],a[1]],e])}
+    const PC=openPoly();if(PC&&PC.kind==='root')return fin('s',PC.pts);
     /* قوس: ملاءمة دائرة للشكل المفتوح */
     {let m0=0,m1=0;P.forEach(q=>{m0+=q[0];m1+=q[1]});m0/=n;m1/=n;let Suu=0,Suv=0,Svv=0,Su3=0,Sv3=0,Suvv=0,Svuu=0;
       P.forEach(q=>{const u=q[0]-m0,v=q[1]-m1;Suu+=u*u;Suv+=u*v;Svv+=v*v;Su3+=u*u*u;Sv3+=v*v*v;Suvv+=u*v*v;Svuu+=v*u*u});
       const det=Suu*Svv-Suv*Suv,r1=.5*(Su3+Suvv),r2=.5*(Sv3+Svuu);
       if(Math.abs(det)>1e-12){const uc=(r1*Svv-r2*Suv)/det,vc=(Suu*r2-Suv*r1)/det,cx=m0+uc,cy=m1+vc,R=Math.sqrt(uc*uc+vc*vc+(Suu+Svv)/n);
         let er=0;P.forEach(q=>{er+=Math.abs(Math.hypot(q[0]-cx,q[1]-cy)-R)});er/=n*R;
-        if(er<.05&&R<3*dg&&R>.02){let sw=0,pa=Math.atan2(P[0][1]-cy,P[0][0]-cx);const a0=pa;
+        if(er<.05&&R<3*dg&&R>.02&&!(PC&&PC.e<er*R/dg*.8)){let sw=0,pa=Math.atan2(P[0][1]-cy,P[0][0]-cx);const a0=pa;
           for(let i=1;i<n;i++){const t=Math.atan2(P[i][1]-cy,P[i][0]-cx);let d=t-pa;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;sw+=d;pa=t}
-          if(Math.abs(sw)>.5&&Math.abs(sw)<5.9){const M=Math.max(16,Math.round(Math.abs(sw)*14)),pr=raw[0][2],out=[];
+          if(Math.abs(sw)>.5&&Math.abs(sw)<5.9){const M=Math.max(16,Math.round(Math.abs(sw)*14)),pr=PR,out=[];
             for(let i=0;i<=M;i++){const t=a0+sw*i/M;const q=[cx+R*Math.cos(t),cy+R*Math.sin(t)];if(pr!==undefined)q.push(pr);out.push(q)}
             return fin('s',out)}}}}
-    {const op=openPoly();if(op)return fin('s',op)}
+    if(PC)return fin('s',PC.pts);
     return false}
   /* ٢) شكل مغلق: نبحث عن الزوايا */
   let mi=0,m=0;P.forEach((q,i)=>{const d=Math.hypot(q[0]-a[0],q[1]-a[1]);if(d>m){m=d;mi=i}});
@@ -3484,6 +3531,7 @@ function recog(it){
   const tn=i=>ang(V[(i+V.length-1)%V.length],V[i],V[(i+1)%V.length]);
   for(let ch=1;ch&&V.length>3;){ch=0;let w=-1,wv=1e9;for(let i=0;i<V.length;i++){const t=tn(i),s=Math.hypot(V[(i+1)%V.length][0]-V[i][0],V[(i+1)%V.length][1]-V[i][1])<.06*per()?t-40:t;if(s<28&&s<wv){wv=s;w=i}}if(w>=0){V.splice(w,1);ch=1}}
   const k=V.length;
+  {const S=starFit(V);if(S)return fin('q',S)}
   /* قياس خطأ المطابقة لكل مرشّح */
   const pe=k>=3?P.reduce((s,q)=>{let d=1e9;for(let i=0;i<k;i++)d=Math.min(d,dseg(q,V[i],V[(i+1)%k]));return s+d},0)/n/dg:1;
   /* قطع ناقص: محاور من العزوم (يدعم المائل) */
